@@ -2,20 +2,26 @@
 #Persistent
 #SingleInstance Force
 
+#Include, %A_ScriptDir%\CommandDistributor.ahk
+
 discordHandle := -1
 actionTime := 100
-commandCheckInterval := 1000
-FocusDiscord()
+Main()
 
-loop {
-    Sleep, %commandCheckInterval%
-    command := GetCommand()
+Main()
+{
+    commandCheckInterval := 1000
+    FocusDiscord()
 
-    if (command != "")
-    {
-        ;Execute command
-        FocusDiscord()
-        DeleteLastMessage()
+    loop {
+        Sleep, %commandCheckInterval%
+        command := GetCommand()
+
+        if (command != "") {
+            DistributeCommand(command)
+            FocusDiscord()
+            DeleteLastMessage()
+        }
     }
 }
 
@@ -59,7 +65,7 @@ GetCommand()
     Clipboard := savedClipboard
     savedClipboard := ""
 
-    return %command%
+    return LTrim(command)
 }
 
 CopyLastMessage()
