@@ -1,6 +1,6 @@
 ﻿#NoEnv
-#Include, %A_ScriptDir%\DiscordChannels.ahk
-#Include, %A_ScriptDir%\DiscordMessages.ahk
+#Include *i %A_ScriptDir%\DiscordChannels.ahk
+#Include *i %A_ScriptDir%\DiscordMessages.ahk
 
 GetOrCreateDiscordHandle()
 {
@@ -73,13 +73,13 @@ DeleteLastMessage()
     Sleep, %actionTime%
 }
 
-WriteCommandError()
+WriteOutput(message)
 {
     global
     NavigateToOutChannel()
     FocusDiscord()
     Sleep, %actionTime%
-    SendInput, Error - Invalid command{enter}
+    SendInput, %message%{enter}
     Sleep, %actionTime%
     NavigateToInChannel()
 }
