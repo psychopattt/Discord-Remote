@@ -14,7 +14,7 @@ DistributeCommand(command)
 
 ExtractCommandParts(command)
 {
-    return StrSplit(command, A_Space,, 2)
+    return StrSplit(command, [A_Space, "`n"], "`r", 2)
 }
 
 FormatCommandName(commandName)
