@@ -13,18 +13,28 @@ GetOrCreateDiscordHandle()
             Run, %A_LoopFileFullPath%,,, discordPid
             WinWait, ahk_pid %discordPid% ; Wait until window exists
             WinGet, discordHandle, ID, ahk_pid %discordPid% ; Get window Id
+            Sleep, 10000 ; Discord start time
             break
         }
+    }
+}
+
+GetDiscordHandle()
+{
+    global
+    if (!WinExist("ahk_id" discordHandle)) {
+        while, (!WinExist("ahk_exe Discord.exe")) {
+            Sleep, 100
+        }
+
+        discordHandle := WinExist("ahk_exe Discord.exe")
     }
 }
 
 FocusDiscord()
 {
     global
-    if (!WinExist("ahk_id" discordHandle)) {
-        GetOrCreateDiscordHandle()
-    }
-
+    GetDiscordHandle()
     WinWait, ahk_id %discordHandle% ; Wait until window exists
     WinActivate, ahk_id %discordHandle% ; Activate window
     WinSet, Top,, ahk_id %discordHandle% ; Bring window to front

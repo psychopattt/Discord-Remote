@@ -13,7 +13,7 @@ Main()
 Main()
 {
     global failsafeRequired
-    failCheckInterval := 10000
+    failCheckInterval := 20000
 
     loop {
         if (failsafeRequired) {
@@ -35,6 +35,7 @@ ResetFailsafe()
 TriggerFailsafe()
 {
     SendStopCaptureCommands()
+    GetOrCreateDiscordHandle()
     FocusDiscord()
     NavigateToInChannel()
     SendStartCaptureCommands()
