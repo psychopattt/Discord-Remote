@@ -29,6 +29,9 @@ Main()
                 ExecuteCommand(command, commandsPath)
                 FocusDiscord()
                 DeleteLastMessage()
+            } else if (command != "") {
+                DeleteLastMessage()
+                WriteCommandError()
             }
         }
     }

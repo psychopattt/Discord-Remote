@@ -72,3 +72,14 @@ DeleteLastMessage()
     SendInput, {BackSpace}{Enter}
     Sleep, %actionTime%
 }
+
+WriteCommandError()
+{
+    global
+    NavigateToOutChannel()
+    FocusDiscord()
+    Sleep, %actionTime%
+    SendInput, Error - Invalid command{enter}
+    Sleep, %actionTime%
+    NavigateToInChannel()
+}

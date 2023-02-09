@@ -4,6 +4,7 @@
 
 #Include, %A_ScriptDir%\DiscordControls.ahk
 
+actionTime := 100
 discordHandle := -1
 failsafeRequired := true
 OnMessage(0x2BED, "ResetFailsafe")
@@ -13,7 +14,7 @@ Main()
 Main()
 {
     global failsafeRequired
-    failCheckInterval := 20000
+    failCheckInterval := 60000
 
     loop {
         if (failsafeRequired) {
