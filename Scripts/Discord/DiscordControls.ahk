@@ -1,4 +1,6 @@
 ﻿#NoEnv
+#Include, %A_ScriptDir%\DiscordChannels.ahk
+#Include, %A_ScriptDir%\DiscordMessages.ahk
 
 GetOrCreateDiscordHandle()
 {

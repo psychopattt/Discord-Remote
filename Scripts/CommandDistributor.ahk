@@ -1,6 +1,21 @@
 ﻿#NoEnv
 
-DistributeCommand(command, commandsPath)
+CommandExists(command, commandsPath)
+{
+    if (command != "") {
+        commandParts := ExtractCommandParts(command)
+        commandName := FormatCommandName(commandParts[1])
+        commandPath := commandsPath . commandName . ".ahk"
+    
+        if (FileExist(commandPath)) {
+            return true
+        }
+    }
+
+    return false
+}
+
+ExecuteCommand(command, commandsPath)
 {
     commandParts := ExtractCommandParts(command)
     commandName := FormatCommandName(commandParts[1])

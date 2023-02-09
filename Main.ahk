@@ -6,6 +6,7 @@ SetWorkingDir, %A_ScriptDir%\Scripts
 
 Run, "SleepBlocker.ahk",,, sleepBlockerPid
 Run, "Discord\DiscordManager.ahk",,, discordManagerPid
+Run, "Discord\DiscordFailsafe.ahk",,, discordFailsafePid
 
 OnExit("KillAllScripts")
 
@@ -14,6 +15,7 @@ KillAllScripts()
     global
     Process, Close, %sleepBlockerPid%
     Process, Close, %discordManagerPid%
+    Process, Close, %discordFailsafePid%
 }
 
 ^!F4::ExitApp, 0

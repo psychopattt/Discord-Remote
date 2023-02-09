@@ -8,5 +8,5 @@ commandsPath := A_ScriptDir . "\"
 
 for i, command in commandsArray
 {
-    DistributeCommand(command, commandsPath)
+    ExecuteCommand(command, commandsPath)
 }
