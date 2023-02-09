@@ -1,29 +1,4 @@
 ﻿#NoEnv
-#Persistent
-#SingleInstance Force
-
-#Include, %A_ScriptDir%\CommandDistributor.ahk
-
-discordHandle := -1
-actionTime := 100
-Main()
-
-Main()
-{
-    commandCheckInterval := 1000
-    FocusDiscord()
-
-    loop {
-        Sleep, %commandCheckInterval%
-        command := GetCommand()
-
-        if (command != "") {
-            DistributeCommand(command)
-            FocusDiscord()
-            DeleteLastMessage()
-        }
-    }
-}
 
 GetOrCreateDiscordHandle()
 {

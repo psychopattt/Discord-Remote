@@ -1,11 +1,11 @@
-﻿SetWorkingDir %A_ScriptDir%\Commands
+﻿#NoEnv
 
-DistributeCommand(command)
+DistributeCommand(command, commandsPath)
 {
     commandParts := ExtractCommandParts(command)
     commandName := FormatCommandName(commandParts[1])
     commandParameters := commandParts[2]
-    commandPath := commandName . ".ahk"
+    commandPath := commandsPath . commandName . ".ahk"
 
     if (FileExist(commandPath)) {
         RunWait, %commandPath% "%commandParameters%"
