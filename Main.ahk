@@ -2,7 +2,7 @@
 #Persistent
 #SingleInstance Force
 
-SetWorkingDir, %A_ScriptDir%/scripts
+SetWorkingDir, %A_ScriptDir%\scripts
 
 Run, "SleepBlocker.ahk",,, sleepBlockerPID
 Run, "DiscordManager.ahk",,, discordManagerPID
