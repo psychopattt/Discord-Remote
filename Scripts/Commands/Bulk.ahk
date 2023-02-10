@@ -12,7 +12,7 @@ commandsPath := A_ScriptDir . "\"
 for i, command in commandsArray
 {
     if (!CommandExists(command, commandsPath)) {
-        WriteOutput("Error - Invalid command")
+        WriteOutput("Error - Invalid command: " . command)
     } else {
         ExecuteCommand(command, commandsPath)
     }

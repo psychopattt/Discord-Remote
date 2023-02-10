@@ -31,7 +31,7 @@ Main()
                 DeleteLastMessage()
             } else if (command != "") {
                 DeleteLastMessage()
-                WriteOutput("Error - Invalid command")
+                WriteOutput("Error - Invalid command: " . command)
             }
         }
     }
