@@ -10,10 +10,11 @@ NavigateToInChannel()
 DeleteLastMessage()
 WriteOutput("Shutdown signal received")
 SendShutdownSignal()
-ShutdownDiscord()
 
-ShutdownDiscord()
-{
-    discordHandle := WinExist("ahk_exe Discord.exe")
-    WinClose, ahk_id %discordHandle%
+parameter := A_Args[1]
+parameter := Trim(parameter)
+
+if (parameter != "") {
+    Sleep, 5000 ; Waits for everything to complete
+    DllCall("user32.dll\LockWorkStation")
 }
