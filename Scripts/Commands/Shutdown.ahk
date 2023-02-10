@@ -17,6 +17,7 @@ if (parameter != "") {
 FocusDiscord()
 NavigateToInChannel()
 DeleteLastMessage()
+Sleep, %actionTime%
 WriteOutput(message)
 Sleep, 5000 ; Waits for everything to complete
 SendShutdownSignal()
