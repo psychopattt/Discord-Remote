@@ -13,11 +13,36 @@ switch (parameters.Length())
     Case 0:
         ScreenshotWholeScreen()
     Case 2:
-        ScreenshotAroundMouse()
+        if (ValidateParameters(parameters, 2)) {
+            ScreenshotAroundMouse(parameters)
+        }
     Case 4:
-        ScreenshotSpecifiedPart()
+        if (ValidateParameters(parameters, 4)) {
+            ScreenshotSpecifiedZone(parameters)
+        }
     Default:
-        WriteOutput("Error - Screenshot: Invalid parameters")
+        WriteScreenshotError()
+}
+
+WriteScreenshotError()
+{
+    WriteOutput("Error - Screenshot: Invalid parameters")
+}
+
+ValidateParameters(parameters, paramCount)
+{
+    Loop %paramCount%
+    {
+        currentParam := parameters[A_Index]
+
+        if currentParam is not Integer
+        {
+            WriteScreenshotError()
+            return false
+        }
+    }
+
+    return true
 }
 
 ScreenshotWholeScreen()
@@ -30,12 +55,23 @@ ScreenshotWholeScreen()
     SendScreenshot()
 }
 
-ScreenshotAroundMouse()
+ScreenshotAroundMouse(parameters)
 {
+    global actionTime
+    width := parameters[1]
+    height := parameters[2]
+    MouseGetPos, mouseX, mouseY
 
+    SendInput, #+s
+    Sleep, (actionTime * 10)
+    MouseClickDrag, Left, (-width / 2), (-height / 2), %width%, %height%, 0, R
+    Sleep, (actionTime * 5)
+
+    MouseMove, %mouseX%, %mouseY%, 0
+    SendScreenshot()
 }
 
-ScreenshotSpecifiedPart()
+ScreenshotSpecifiedZone(parameters)
 {
     
 }

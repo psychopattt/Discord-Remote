@@ -15,11 +15,13 @@ if (parameter != "") {
 }
 
 FocusDiscord()
+Sleep, %actionTime%
 NavigateToInChannel()
+Sleep, %actionTime%
 DeleteLastMessage()
 Sleep, %actionTime%
 WriteOutput(message)
-Sleep, 5000 ; Waits for everything to complete
+Sleep, (actionTime * 50) ; Waits for everything to complete
 SendShutdownSignal()
 
 if (parameter != "") {
