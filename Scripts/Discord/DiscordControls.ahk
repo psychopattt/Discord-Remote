@@ -76,6 +76,7 @@ DeleteLastMessage()
 WriteOutput(message)
 {
     global actionTime
+    FocusDiscord()
     NavigateToOutChannel()
     FocusDiscord()
     Sleep, %actionTime%

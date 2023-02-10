@@ -5,6 +5,8 @@
 #Include, %A_ScriptDir%\..\Discord\DiscordMessages.ahk
 
 actionTime := 100
+FocusDiscord()
+NavigateToInChannel()
 DeleteLastMessage()
 WriteOutput("Shutdown signal received")
 SendShutdownSignal()

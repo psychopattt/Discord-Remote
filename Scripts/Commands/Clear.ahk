@@ -20,12 +20,14 @@ Switch (parameter)
 
 ClearInput()
 {
+    FocusDiscord()
     NavigateToInChannel()
     ClearCurrentChannel()
 }
 
 ClearOutput()
 {
+    FocusDiscord()
     NavigateToOutChannel()
     ClearCurrentChannel()
     NavigateToInChannel()
