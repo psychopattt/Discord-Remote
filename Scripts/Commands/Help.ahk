@@ -21,8 +21,16 @@ if (command == "") {
 
 WriteCommandHelp(command)
 {
+    global actionTime
+
     switch (command)
     {
+        Default:
+            helpMessage =
+            (
+                Help has not been implemented for this command
+                Good luck{!}
+            )
         Case "Help":
             helpMessage =
             (
@@ -62,11 +70,42 @@ WriteCommandHelp(command)
                 *, all or everything: Clears the input and the output channels
                 Default: Clears the output channel
             )
-        Default:
+        Case "Click":
             helpMessage =
             (
-                Help has not been implemented for this command
-                Good luck{!}
+                Sends a mouse click
+                It works just as AutoHotKey's Click command
+                Options:
+                Left (L), Right (R), Middle (M), X1 or X2: Specifies which button to click (X1 and X2 are side buttons)
+                X Y: Specifies where to click (If present, must be before the Number option)
+                Number: Specifies how many clicks to do
+                Default: Sends a single left click at the current mouse position
+            )
+        Case "Input":
+            helpMessage =
+            (
+                Sends the specified inputs
+                It works just as AutoHotKey's SendInput command
+                It can use AutoHotKey's formatting
+                Options:
+                Text: The inputs that will be sent
+            )
+        Case "Mouse":
+            helpMessage =
+            (
+                Moves the mouse to the specified position on the screen
+                The position can be absolute or relative
+                Options:
+                X Y: The mouse will be placed on (X, Y)
+                {+}X {+}Y: The mouse will be offset by {+}X and {+}Y
+                -X -Y: The mouse will be offset by -X and -Y
+                {+}X -Y: The mouse will be offset by {+}X and -Y
+                -X {+}Y: The mouse will be offset by -X and {+}Y
+                X {+}Y: The mouse will be placed on X and offset by {+}Y
+                X -Y: The mouse will be placed on X and offset by -Y
+                {+}X Y: The mouse will be offset by {+}X and placed on Y
+                -X Y: The mouse will be offset by -X and placed on Y
+                Default: Outputs the mouse's current position
             )
     }
 
@@ -76,5 +115,5 @@ WriteCommandHelp(command)
     helpMessage := "|+{Enter}Help - " . command . "+{Enter}" . helpMessage . "+{Enter}|"
 
     WriteOutput(helpMessage)
-    Sleep, %actionTime%
+    Sleep, (actionTime * 3)
 }
