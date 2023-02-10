@@ -9,6 +9,7 @@ Run, "Discord\DiscordManager.ahk",,, discordManagerPid
 Run, "Discord\DiscordFailsafe.ahk",,, discordFailsafePid
 
 OnExit("KillAllScripts")
+OnMessage(0xD1E0, "KillAllScripts")
 
 KillAllScripts()
 {
@@ -16,6 +17,7 @@ KillAllScripts()
     Process, Close, %sleepBlockerPid%
     Process, Close, %discordManagerPid%
     Process, Close, %discordFailsafePid%
+    ExitApp, 0
 }
 
-^!F4::ExitApp, 0
+^!F4::KillAllScripts()

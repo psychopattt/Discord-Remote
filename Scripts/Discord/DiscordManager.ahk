@@ -8,8 +8,8 @@
 actionTime := 100
 discordHandle := -1
 captureCommands := false
-OnMessage(0x8000, "StartCaptureCommands")
-OnMessage(0x8001, "StopCaptureCommands")
+OnMessage(0xCA00, "StopCaptureCommands")
+OnMessage(0xCA01, "StartCaptureCommands")
 Main()
 
 Main()

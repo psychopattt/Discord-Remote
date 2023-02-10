@@ -13,12 +13,12 @@ SendMessage(message)
     DetectHiddenWindows, Off
 }
 
-SendStartCaptureCommands() {
-    SendMessage(0x8000)
+SendStopCaptureCommands() {
+    SendMessage(0xCA00)
 }
 
-SendStopCaptureCommands() {
-    SendMessage(0x8001)
+SendStartCaptureCommands() {
+    SendMessage(0xCA01)
 }
 
 SendResetFailsafe() {
@@ -27,4 +27,8 @@ SendResetFailsafe() {
 
 SendTriggerFailsafe() {
     SendMessage(0xDEAD)
+}
+
+SendShutdownSignal() {
+    SendMessage(0xD1E0)
 }
