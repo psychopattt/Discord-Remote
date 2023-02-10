@@ -52,7 +52,7 @@ ScreenshotWholeScreen()
     Sleep, (actionTime * 10)
     SendInput, {Tab}{Tab}{Tab}{Tab}{Enter}
     Sleep, (actionTime * 5)
-    SendScreenshot()
+    SendScreenshot("[Whole Screen]")
 }
 
 ScreenshotAroundMouse(parameters)
@@ -68,7 +68,7 @@ ScreenshotAroundMouse(parameters)
     Sleep, (actionTime * 5)
 
     MouseMove, %mouseX%, %mouseY%, 0
-    SendScreenshot()
+    SendScreenshot("[Around Mouse], {" . width . ", " . height . "}")
 }
 
 ScreenshotSpecifiedZone(parameters)
@@ -86,16 +86,17 @@ ScreenshotSpecifiedZone(parameters)
     Sleep, (actionTime * 5)
 
     MouseMove, %mouseX%, %mouseY%, 0
-    SendScreenshot()
+    SendScreenshot("[Specified Zone], (" . x . ", " . y . "), {" . width . ", " . height . "}")
 }
 
-SendScreenshot()
+SendScreenshot(message)
 {
     global actionTime
     FocusDiscord()
     NavigateToOutChannel()
     Sleep, %actionTime%
-    SendInput, Screenshot result:^v
+    SendInput, {Raw}Screenshot %message%:
+    SendInput, ^v
     Sleep, %actionTime%
     SendInput, {Enter}
     Sleep, %actionTime%
