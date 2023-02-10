@@ -52,15 +52,15 @@ WriteCommandHelp(command)
                 Ping
                 Screenshot
                 Shutdown
-                Sleep
                 Text
+                Wait / Sleep
             )
         Case "Bulk":
             helpMessage =
             (
                 Execute multiple commands
                 Bulk and each of it's commands must be on a separate line
-                It's a good idea to put delays (see Sleep) when executing commands in bulk
+                It's a good idea to put delays (see Wait) when executing commands in bulk
             )
         Case "Clear":
             helpMessage =
@@ -131,15 +131,6 @@ WriteCommandHelp(command)
                 Any: Terminates Discord Remote and locks the PC
                 Default: Terminates Discord Remote
             )
-        Case "Sleep":
-            helpMessage =
-            (
-                Wait for X milliseconds
-                It's a good idea to put delays when executing commands in bulk
-                Options:
-                Number: Wait for Number milliseconds
-                Default: Wait for 0 milliseconds
-            )
         Case "Text":
             helpMessage =
             (
@@ -147,6 +138,15 @@ WriteCommandHelp(command)
                 It works just like AutoHotKey's SendRaw command
                 Options:
                 Text: The text that will be sent
+            )
+        Case "Wait", "Sleep":
+            helpMessage =
+            (
+                Wait for X milliseconds
+                It's a good idea to put delays when executing commands in bulk
+                Options:
+                Number: Wait for Number milliseconds
+                Default: Wait for 0 milliseconds
             )
     }
 

@@ -1,4 +1,5 @@
 ﻿#NoEnv
 
 sleepTime := A_Args[1]
-Sleep, %sleepTime%
+waitCommandPath := A_ScriptDir . "\Wait.ahk"
+RunWait, %waitCommandPath% %sleepTime%
