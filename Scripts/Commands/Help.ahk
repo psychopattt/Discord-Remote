@@ -60,6 +60,7 @@ WriteCommandHelp(command)
             (
                 Execute multiple commands
                 Bulk and each of it's commands must be on a separate line
+                It's a good idea to put delays (see Sleep) when executing commands in bulk
             )
         Case "Clear":
             helpMessage =
@@ -85,7 +86,7 @@ WriteCommandHelp(command)
             helpMessage =
             (
                 Sends the specified inputs
-                It works just as AutoHotKey's SendInput command
+                It works just like AutoHotKey's SendInput command
                 It can use AutoHotKey's formatting
                 Options:
                 Text: The inputs that will be sent
@@ -106,6 +107,46 @@ WriteCommandHelp(command)
                 {+}X Y: The mouse will be offset by {+}X and placed on Y
                 -X Y: The mouse will be offset by -X and placed on Y
                 Default: Outputs the mouse's current position
+            )
+        Case "Ping":
+            helpMessage =
+            (
+                Sends a simple ping to see if Discord Remote is running
+                Writes a message in the output channel
+            )
+        Case "Screenshot":
+            helpMessage =
+            (
+                Takes a screenshot and sends it in the output channel
+                Options:
+                Width Height: Screenshots a rectangle around the mouse (mouse centered)
+                X Y Width Height: Screenshots the specified rectangle (X, Y are the top left)
+                Default: Screenshots the whole screen
+            )
+        Case "Shutdown":
+            helpMessage =
+            (
+                Terminates Discord Remote and optionally locks (Win {+} L) the PC
+                Options:
+                Any: Terminates Discord Remote and locks the PC
+                Default: Terminates Discord Remote
+            )
+        Case "Sleep":
+            helpMessage =
+            (
+                Wait for X milliseconds
+                It's a good idea to put delays when executing commands in bulk
+                Options:
+                Number: Wait for Number milliseconds
+                Default: Wait for 0 milliseconds
+            )
+        Case "Text":
+            helpMessage =
+            (
+                Sends the specified text
+                It works just like AutoHotKey's SendRaw command
+                Options:
+                Text: The text that will be sent
             )
     }
 
