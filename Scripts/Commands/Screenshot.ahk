@@ -73,7 +73,20 @@ ScreenshotAroundMouse(parameters)
 
 ScreenshotSpecifiedZone(parameters)
 {
-    
+    global actionTime
+    x := parameters[1]
+    y := parameters[2]
+    width := parameters[3]
+    height := parameters[4]
+    MouseGetPos, mouseX, mouseY
+
+    SendInput, #+s
+    Sleep, (actionTime * 10)
+    MouseClickDrag, Left, %x%, %y%, (x + width), (y + height), 0
+    Sleep, (actionTime * 5)
+
+    MouseMove, %mouseX%, %mouseY%, 0
+    SendScreenshot()
 }
 
 SendScreenshot()
