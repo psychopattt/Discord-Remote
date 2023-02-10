@@ -2,7 +2,7 @@
 
 NavigateToChannel(channelName)
 {
-    global
+    global actionTime
     SendInput, ^k{#}%channelName%{Enter}
     Sleep, %actionTime%
 }

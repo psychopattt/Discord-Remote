@@ -4,7 +4,7 @@
 
 GetOrCreateDiscordHandle()
 {
-    global
+    global discordHandle
     discordHandle := WinExist("ahk_exe Discord.exe")
 
     if (!discordHandle) {
@@ -21,7 +21,7 @@ GetOrCreateDiscordHandle()
 
 GetDiscordHandle()
 {
-    global
+    global discordHandle
     if (!WinExist("ahk_id" discordHandle)) {
         while, (!WinExist("ahk_exe Discord.exe")) {
             Sleep, 100
@@ -33,7 +33,7 @@ GetDiscordHandle()
 
 FocusDiscord()
 {
-    global
+    global discordHandle
     GetDiscordHandle()
     WinWait, ahk_id %discordHandle% ; Wait until window exists
     WinActivate, ahk_id %discordHandle% ; Activate window
@@ -57,7 +57,7 @@ GetCommand()
 
 CopyLastMessage()
 {
-    global
+    global actionTime
     SendInput, {Esc}{Up}^a
     Sleep, %actionTime%
     SendInput, ^c{Esc}
@@ -66,7 +66,7 @@ CopyLastMessage()
 
 DeleteLastMessage()
 {
-    global
+    global actionTime
     SendInput, {Tab}{Up}
     Sleep, %actionTime%
     SendInput, {BackSpace}{Enter}
@@ -75,11 +75,11 @@ DeleteLastMessage()
 
 WriteOutput(message)
 {
-    global
+    global actionTime
     NavigateToOutChannel()
     FocusDiscord()
     Sleep, %actionTime%
-    SendInput, %message%{enter}
+    SendInput, %message%{Enter}
     Sleep, %actionTime%
     NavigateToInChannel()
 }
