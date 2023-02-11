@@ -4,16 +4,17 @@
 
 GetOrCreateDiscordHandle()
 {
+    global actionTime
     global discordHandle
     discordHandle := WinExist("ahk_exe Discord.exe")
 
-    if (!discordHandle) {
+    if (!discordHandle) { ; Find Discord.exe and run it
         Loop, Files, %A_AppData%\..\Local\Discord\Discord.exe, R
         {
             Run, %A_LoopFileFullPath%,,, discordPid
             WinWait, ahk_pid %discordPid% ; Wait until window exists
             WinGet, discordHandle, ID, ahk_pid %discordPid% ; Get window Id
-            Sleep, 10000 ; Discord start time
+            Sleep, (actionTime * 100) ; Wait for Discord to be started
             break
         }
     }
@@ -21,10 +22,11 @@ GetOrCreateDiscordHandle()
 
 GetDiscordHandle()
 {
-    global discordHandle
+    global
+
     if (!WinExist("ahk_id" discordHandle)) {
         while, (!WinExist("ahk_exe Discord.exe")) {
-            Sleep, 100
+            Sleep, %actionTime%
         }
 
         discordHandle := WinExist("ahk_exe Discord.exe")

@@ -35,5 +35,6 @@ ExtractCommandParts(command)
 FormatCommandName(commandName)
 {
     StringUpper, formattedCommandName, commandName, T
+    
     return formattedCommandName
 }

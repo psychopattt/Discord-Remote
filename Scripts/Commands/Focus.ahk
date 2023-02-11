@@ -22,14 +22,14 @@ OutputRunningApps()
     global actionTime
     actionTime := 300
 
-    processes := "``````Running processes:+{Enter}"
+    processes := "``````Running processes:{Enter}"
     WinGet, handles, List
 
     Loop, % handles {
         handle := handles%A_Index%
         WinGet, name, ProcessName, ahk_id %handle%
         WinGet, pid, PID, ahk_id %handle%
-        processes := processes . name . ": PID = " . pid . ", Handle = " . handle . "+{Enter}"
+        processes := processes . name . ": PID = " . pid . ", Handle = " . handle . "{Enter}"
     }
 
     processes := processes . "``````{Enter}"

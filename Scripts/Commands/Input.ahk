@@ -1,4 +1,4 @@
 ﻿#NoEnv
 
-textToInput := A_Args[1]
-SendInput, %textToInput%
+inputs := A_Args[1]
+SendInput, %inputs%

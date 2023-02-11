@@ -1,5 +1,5 @@
 ﻿#NoEnv
 
+options := A_Args[1]
 CoordMode, Mouse, Screen
-parameterString := A_Args[1]
-SendInput, {Click %parameterString%}
+SendInput, {Click %options%}

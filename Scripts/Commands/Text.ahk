@@ -1,5 +1,5 @@
 ﻿#NoEnv
 
 SendMode Input
-textToInput := A_Args[1]
-SendRaw, %textToInput%
+rawText := A_Args[1]
+SendRaw, %rawText%
