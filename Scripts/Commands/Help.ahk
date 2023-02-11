@@ -51,6 +51,7 @@ WriteCommandHelp(command)
                 Mouse
                 Ping
                 Screenshot
+                Search
                 Shutdown
                 Text
                 Wait / Sleep
@@ -77,6 +78,7 @@ WriteCommandHelp(command)
                 Sends a mouse click
                 It works just as AutoHotKey's Click command
                 Options:
+                Up (U) or Down (D): Specifies weither to click down or up instead of both
                 Left (L), Right (R), Middle (M), X1 or X2: Specifies which button to click (X1 and X2 are side buttons)
                 X Y: Specifies where to click (If present, must be before the Number option)
                 Number: Specifies how many clicks to do
@@ -122,6 +124,14 @@ WriteCommandHelp(command)
                 Width Height: Screenshots a rectangle around the mouse (mouse centered)
                 X Y Width Height: Screenshots the specified rectangle (X, Y are the top left)
                 Default: Screenshots the whole screen
+            )
+        Case "Search":
+            helpMessage =
+            (
+                Searches for some text in the Windows search box and starts the first result
+                The taskbar search box must not be hidden
+                Options:
+                Text: The text to search
             )
         Case "Shutdown":
             helpMessage =

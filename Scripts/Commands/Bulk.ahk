@@ -17,5 +17,5 @@ for i, command in commandsArray
         ExecuteCommand(command, commandsPath)
     }
 
-    Sleep, %actionTime%
+    Sleep, (actionTime * 3)
 }
