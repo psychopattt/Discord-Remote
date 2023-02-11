@@ -37,7 +37,7 @@ WriteCommandHelp(command)
                 Shows how to use a certain command
                 Options:
                 List: Lists all command names
-                Command Name: Shows help for the specified command
+                Command Name: Shows help for a specific command
                 Default: Shows help for the Help command
             )
         Case "List":
@@ -61,7 +61,7 @@ WriteCommandHelp(command)
             helpMessage =
             (
                 Execute multiple commands
-                Bulk and each of it's commands must be on a separate line
+                Bulk and all of its commands must be on a separate line
                 It's a good idea to put delays (see Wait) when executing commands in bulk
             )
         Case "Clear":
@@ -166,7 +166,6 @@ WriteCommandHelp(command)
             helpMessage =
             (
                 Wait for X milliseconds
-                It's a good idea to put delays when executing commands in bulk
                 Options:
                 Number: Wait for Number milliseconds
                 Default: Wait for 0 milliseconds
@@ -174,9 +173,9 @@ WriteCommandHelp(command)
     }
 
     helpMessage := StrReplace(helpMessage, "                ")
-    helpMessage := StrReplace(helpMessage, "`n", "+{Enter}")
+    helpMessage := StrReplace(helpMessage, "`n", "{Enter}")
     helpMessage := StrReplace(helpMessage, "`r")
-    helpMessage := "|+{Enter}Help - " . command . "+{Enter}" . helpMessage . "+{Enter}|"
+    helpMessage := "``````Help - " . command . "{Enter}" . helpMessage . "``````{Enter}"
 
     WriteOutput(helpMessage)
     Sleep, (actionTime * 3)
