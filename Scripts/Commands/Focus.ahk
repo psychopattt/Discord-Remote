@@ -11,35 +11,76 @@ app := parameters[2]
 mode := Trim(mode)
 app := Trim(app)
 
-if (app == "" || mode == "") {
-    OutputRunningApps()
-} else {
-    FocusApp(mode, app)
+if (mode != "") {
+    StringLower, mode, mode
 }
 
-OutputRunningApps()
+if (app == "") {
+    if (mode == "h" || mode == "hidden" || mode == "a" || mode == "all") {
+        DetectHiddenWindows, On
+        GatherRunningProcesses()
+    } else if (mode == "") {
+        GatherRunningProcesses()
+    } else {
+        WriteFocusErrorMessage("Error - Focus: Invalid mode """ . mode . """ or missing process name")
+    }
+}
+
+if (app != "" && mode != "") {
+    FocusProcess(mode, app)
+}
+
+GatherRunningProcesses()
 {
     global actionTime
-    actionTime := 300
+    actionTime *= 6 ; Ensure there's time to write all characters
+    pageCounter := 1
 
-    processes := "``````Running processes:{Enter}"
+    processes := ""
+    VarSetCapacity(processes, 5000) ; Reserve 5 KB of memory
+    processes := "``````Running processes [" . pageCounter . "]:{Enter}"
+    
+    StartProcessOutput()
     WinGet, handles, List
 
     Loop, % handles {
+        if (StrLen(processes) > 1000) { ; Split processes into different messages
+            OutputRunningProcesses(processes)
+            processes := "``````Running processes [" . ++pageCounter . "]:{Enter}"
+        }
+
         handle := handles%A_Index%
         WinGet, name, ProcessName, ahk_id %handle%
         WinGet, pid, PID, ahk_id %handle%
-        processes := processes . name . ": PID = " . pid . ", Handle = " . handle . "{Enter}"
+        processes .= name . ": PID = " . pid . ", Handle = " . handle . "{Enter}"
     }
 
-    processes := processes . "``````{Enter}"
-    WriteFocusMessage(processes)
+    OutputRunningProcesses(processes)
+    processes := "" ; Release memory
+    StopProcessOutput()
 }
 
-FocusApp(mode, app)
+StartProcessOutput()
 {
-    StringLower, mode, mode
+    FocusDiscord()
+    NavigateToOutChannel()
+}
 
+OutputRunningProcesses(processes)
+{
+    global actionTime
+    WriteCurrentChannel(processes . "``````{Enter}")
+    Sleep, (actionTime * 3)
+}
+
+StopProcessOutput()
+{
+    FocusDiscord()
+    NavigateToInChannel()
+}
+
+FocusProcess(mode, app)
+{
     switch (mode)
     {
         Case "h", "handle":
@@ -47,6 +88,7 @@ FocusApp(mode, app)
                 app := "0x" . app
             }
 
+            DetectHiddenWindows, On
             appHandle := WinExist("ahk_id" app)           
         Case "n", "name":
             if (!InStr(app, ".")) {
@@ -57,7 +99,7 @@ FocusApp(mode, app)
         Case "p", "pid":
             appHandle := WinExist("ahk_pid" app)
         Default:
-            WriteFocusMessage("Error - Focus: Invalid mode """ . mode . """")
+            WriteFocusErrorMessage("Error - Focus: Invalid mode """ . mode . """")
             return
     }
 
@@ -65,13 +107,13 @@ FocusApp(mode, app)
         WinActivate, ahk_id %appHandle%
         WinSet, Top,, ahk_id %appHandle%
     } else {
-        WriteFocusMessage("Error - Focus: The process """ . app . """ (mode """ . mode . """) could not be found")
+        WriteFocusErrorMessage("Error - Focus: The process """ . app . """ (mode """ . mode . """) could not be found")
     }
 }
 
-WriteFocusMessage(message)
+WriteFocusErrorMessage(message)
 {
     global actionTime
     WriteOutput(message)
-    Sleep, (actionTime * 3)
+    Sleep, %actionTime%
 }

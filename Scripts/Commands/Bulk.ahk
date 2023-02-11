@@ -16,6 +16,8 @@ for i, command in commandsArray
     } else {
         ExecuteCommand(command, commandsPath)
     }
+
+    Sleep, (actionTime / 4)
 }
 
-Sleep, (actionTime * 3)
+Sleep, (actionTime * 2)

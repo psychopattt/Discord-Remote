@@ -75,14 +75,19 @@ DeleteLastMessage()
     Sleep, %actionTime%
 }
 
-WriteOutput(message)
+WriteCurrentChannel(message)
 {
     global actionTime
-    FocusDiscord()
-    NavigateToOutChannel()
     FocusDiscord()
     Sleep, %actionTime%
     SendInput, %message%{Enter}
     Sleep, %actionTime%
+}
+
+WriteOutput(message)
+{
+    FocusDiscord()
+    NavigateToOutChannel()
+    WriteCurrentChannel(message)
     NavigateToInChannel()
 }
