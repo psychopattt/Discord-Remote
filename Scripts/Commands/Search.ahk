@@ -1,12 +1,10 @@
 ﻿#NoEnv
 
 actionTime := 100
-CoordMode, Mouse, Screen
 searchText := A_Args[1]
+CoordMode, Mouse, Screen
 
-MouseMove, 65, A_ScreenHeight, 0
-Sleep, (actionTime * 2)
-SendInput, {Click}
+SendInput, #s
 Sleep, (actionTime * 3)
 SendInput, {Raw}%searchText%
 Sleep, %actionTime%

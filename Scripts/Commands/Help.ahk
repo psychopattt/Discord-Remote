@@ -140,8 +140,7 @@ WriteCommandHelp(command)
         Case "Search":
             helpMessage =
             (
-                Searches for some text in the Windows search box and starts the first result
-                The taskbar search box must not be hidden
+                Searches text using the Windows search box (Win {+} S) and starts the first result
                 Options:
                 Text: The text to search
             )
