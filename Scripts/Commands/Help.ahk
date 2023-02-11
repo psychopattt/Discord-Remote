@@ -46,6 +46,7 @@ WriteCommandHelp(command)
                 Bulk
                 Clear
                 Click
+                Focus
                 Help
                 Input
                 Mouse
@@ -83,6 +84,17 @@ WriteCommandHelp(command)
                 X Y: Specifies where to click (If present, must be before the Number option)
                 Number: Specifies how many clicks to do
                 Default: Sends a single left click at the current mouse position
+            )
+        Case "Focus":
+            helpMessage =
+            (
+                Focus a specific window (bring it to the foreground)
+                Options:
+                Mode App: Specifies the detection mode and the app identifier
+                  Mode: Handle (H), Name (N) or PID (P) The handle is always unique
+                  App: The identifier of the app in the current mode
+                Default: Outputs a list of all the (visible) running processes
+                  There might be more processes when running as administrator
             )
         Case "Input":
             helpMessage =
