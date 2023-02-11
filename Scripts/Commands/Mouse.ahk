@@ -53,35 +53,38 @@ MoveMouse(x, y, xMode, yMode)
     if (xMode == yMode) {
         MouseMove, %x%, %y%, 0, %xMode%
     } else {
-        MouseGetPos,, currentY
-        MouseMove, %x%, %currentY%, 0, %xMode%
+        MouseGetPos, currentX, currentY
 
-        MouseGetPos, currentX
-        MouseMove, %currentX%, %y%, 0, %yMode%
+        if (xMode == "R") { ; X is relative and Y is absolute
+            MouseMove, %currentX%, %y%, 0
+            MouseMove, %x%, 0, 0, R
+        } else { ; X is absolute and Y is relative
+            MouseMove, %x%, %currentY%, 0
+            MouseMove, 0, %y%, 0, R
+        }
     }
 }
 
 ValidateCoords(x, y)
 {
-    ErrorMessage := ""
+    errorMessage := ""
 
     if x is not Integer
     {
-        ErrorMessage := "Error - Mouse: Invalid X"
+        errorMessage := "Error - Mouse: Invalid X"
     }
     
     if y is not Integer
     {
-        if (ErrorMessage != "") {
-            ErrorMessage := "Error - Mouse: Invalid X and Y"
+        if (errorMessage != "") {
+            errorMessage := "Error - Mouse: Invalid X and Y"
         } else {
-            ErrorMessage := "Error - Mouse: Invalid Y"
+            errorMessage := "Error - Mouse: Invalid Y"
         }
-        
     }
 
-    if (ErrorMessage != "") {
-        WriteOutput(ErrorMessage)
+    if (errorMessage != "") {
+        WriteOutput(errorMessage)
         return false
     }
 
