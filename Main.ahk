@@ -2,7 +2,14 @@
 #Persistent
 #SingleInstance Force
 
-SetWorkingDir, %A_ScriptDir%\Scripts
+if (A_IsCompiled) {
+    RunInstallScript()
+} else if (false) {
+    ; Switch to true when a new file is added
+    GenerateInstallScript()
+}
+
+SetWorkingDir, %A_WorkingDir%\Scripts\
 
 Run, "SleepBlocker.ahk",,, sleepBlockerPid
 Run, "Discord\DiscordManager.ahk",,, discordManagerPid
@@ -10,6 +17,7 @@ Run, "Discord\DiscordFailsafe.ahk",,, discordFailsafePid
 
 OnExit("KillAllScripts")
 OnMessage(0xD1E0, "KillAllScripts")
+^!F4::KillAllScripts()
 
 KillAllScripts()
 {
@@ -20,4 +28,18 @@ KillAllScripts()
     ExitApp, 0
 }
 
-^!F4::KillAllScripts()
+GenerateInstallScript()
+{
+    installScriptPath := "Scripts\InstallScript.ahk"
+    FileDelete, %installScriptPath%
+
+    Loop, Files, .\Scripts\*.*, FR
+        FileAppend, FileInstall`, %A_LoopFilePath%`, %A_LoopFilePath%`, 0`n, %installScriptPath%
+}
+
+RunInstallScript()
+{
+    FileCreateDir, .\Scripts\Commands
+    FileCreateDir, .\Scripts\Discord
+    #Include, Scripts\InstallScript.ahk
+}
