@@ -54,3 +54,25 @@ All the commands and their details can be seen remotely by using the Help comman
      - Command results will be sent in the `discord-remote-out` channel
  7. To stop Discord Remote, send the Shutdown command
      - Alternatively, you can press `Ctrl + Alt + F4` on the PC being controlled, but it is less reliable
+
+## Configuration
+You can configure a few things in Discord Remote
+ 1. Changing the default input and output Discord channels
+     - Open `./Scripts/Discord/DiscordChannels.ahk`
+     - Rename `discord-remote-in` for any unique channel name
+     - Rename `discord-remote-out` for any unique channel name
+
+ 2. Changing command timings
+     - If you have a faster computer, you can decrease the command delays
+     - If you have a slower computer, you can increase the command delays
+     - Open up any script in `./Scripts` you wish to modify
+     - If the script contains `actionTime := ...` near the top, you can change it's value for any positive number
+     - The number is the amount of milliseconds to wait between certain actions
+
+ 3. Adding commands
+     - You can add a new command by creating a file in the `./Scripts/Commands` directory
+     - The name of the file will be the name of the command
+     - The name must be a capital letter followed by lowercase letters and must not contain spaces
+     - If you use functions from included files (e.g.: `DiscordControls.ahk`), you must specify an `actionTime`
+     - The new command can now be used like any default one
+     - If you want, you can modify `./Scripts/Commands/Help.ahk` to add a help message for your new command
