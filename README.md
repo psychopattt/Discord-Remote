@@ -53,7 +53,7 @@ All the commands and their details can be seen remotely by using the Help comman
      - Commands must be sent into the `discord-remote-in` channel
      - Command results will be sent in the `discord-remote-out` channel
  7. To stop Discord Remote, send the Shutdown command
-     - Alternatively, you can press `Ctrl + Alt + F4` on the PC being controlled, but it is less reliable
+     - Alternatively, you can press `Ctrl + Alt + F4` on the PC being controlled
 
 ## Configuration
 You can configure a few things in Discord Remote

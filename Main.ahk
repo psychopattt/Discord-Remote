@@ -11,9 +11,9 @@ if (A_IsCompiled) {
 
 SetWorkingDir, %A_WorkingDir%\Scripts\
 
-Run, "SleepBlocker.ahk",,, sleepBlockerPid
-Run, "Discord\DiscordManager.ahk",,, discordManagerPid
-Run, "Discord\DiscordFailsafe.ahk",,, discordFailsafePid
+Run, "%A_AhkPath%" "SleepBlocker.ahk",,, sleepBlockerPid
+Run, "%A_AhkPath%" "Discord\DiscordManager.ahk",,, discordManagerPid
+Run, "%A_AhkPath%" "Discord\DiscordFailsafe.ahk",,, discordFailsafePid
 
 OnExit("KillAllScripts")
 OnMessage(0xD1E0, "KillAllScripts")
