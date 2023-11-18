@@ -1,46 +1,51 @@
-﻿#NoEnv
-#Persistent
-#SingleInstance Force
+﻿#SingleInstance Force
 
-if (A_IsCompiled) {
-    RunInstallScript()
-} else if (false) {
-    ; Switch to true when a new file is added
-    GenerateInstallScript()
-}
+/*@Ahk2Exe-Keep
+DirCreate(".\Scripts\Discord")
+DirCreate(".\Scripts\Commands")
+#Include ".\Scripts\InstallScript.ahk"
+*/
 
-SetWorkingDir, %A_WorkingDir%\Scripts\
+Persistent(true)
+SetWorkingDir(A_WorkingDir . "\Scripts\")
 
-Run, "%A_AhkPath%" "SleepBlocker.ahk",,, sleepBlockerPid
-Run, "%A_AhkPath%" "Discord\DiscordManager.ahk",,, discordManagerPid
-Run, "%A_AhkPath%" "Discord\DiscordFailsafe.ahk",,, discordFailsafePid
+Run(A_AhkPath . " SleepBlocker.ahk",,, &sleepBlockerPid)
+Run(A_AhkPath . " Discord\DiscordManager.ahk",,, &discordManagerPid)
+Run(A_AhkPath . " Discord\DiscordFailsafe.ahk",,, &discordFailsafePid)
 
-OnExit("KillAllScripts", 1)
-OnMessage(0xD1E0, "KillAllScripts")
 ^!F4::KillAllScripts()
+OnExit(KillAllScripts, 1)
+OnMessage(0xD1E0, KillAllScripts)
 
-KillAllScripts()
+KillAllScripts(*)
 {
     global
-    Process, Close, %sleepBlockerPid%
-    Process, Close, %discordManagerPid%
-    Process, Close, %discordFailsafePid%
-    OnExit("KillAllScripts", 0)
-    ExitApp, 0
+    ProcessClose(sleepBlockerPid)
+    ProcessClose(discordManagerPid)
+    ProcessClose(discordFailsafePid)
+    OnExit(KillAllScripts, 0)
+    ExitApp()
 }
+
+;@Ahk2Exe-IgnoreBegin
+; Uncomment to regenerate included files
+; GenerateInstallScript()
 
 GenerateInstallScript()
 {
-    installScriptPath := "Scripts\InstallScript.ahk"
-    FileDelete, %installScriptPath%
+    installScriptPath := A_WorkingDir . "\InstallScript.ahk"
+    
+    if (FileExist(installScriptPath))
+        FileDelete(installScriptPath)
 
-    Loop, Files, .\Scripts\*.*, FR
-        FileAppend, FileInstall`, %A_LoopFilePath%`, %A_LoopFilePath%`, 0`n, %installScriptPath%
-}
+    loop files "*.*", "FR"
+    {
+        filePath := ".\Scripts\" . A_LoopFilePath
 
-RunInstallScript()
-{
-    FileCreateDir, .\Scripts\Commands
-    FileCreateDir, .\Scripts\Discord
-    #Include, Scripts\InstallScript.ahk
+        FileAppend(
+            "try { FileInstall(`"" . filePath . "`", `"" .
+            filePath . "`", 0)`n} ", installScriptPath
+        )
+    }
 }
+;@Ahk2Exe-IgnoreEnd
