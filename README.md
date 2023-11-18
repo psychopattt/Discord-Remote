@@ -1,6 +1,9 @@
 # Discord Remote
 Discord Remote is a collection of [AutoHotKey](https://www.autohotkey.com/) scripts that allow you to control your Windows PC remotely via [Discord](https://discord.com/).
 
+## Legacy
+This branch is no longer updated. This version of Discord Remote runs on AutoHotKey v1.1. It can still be used by anyone who has not switched to AHK v2.0 or later, but it's likely missing features.
+
 ## How it works
  1. Discord Remote runs on the PC that's being controlled remotely
  2. The user sends commands and parameters in a specific Discord channel
