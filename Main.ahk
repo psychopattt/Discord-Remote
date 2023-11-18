@@ -15,7 +15,7 @@ Run, "%A_AhkPath%" "SleepBlocker.ahk",,, sleepBlockerPid
 Run, "%A_AhkPath%" "Discord\DiscordManager.ahk",,, discordManagerPid
 Run, "%A_AhkPath%" "Discord\DiscordFailsafe.ahk",,, discordFailsafePid
 
-OnExit("KillAllScripts")
+OnExit("KillAllScripts", 1)
 OnMessage(0xD1E0, "KillAllScripts")
 ^!F4::KillAllScripts()
 
@@ -25,6 +25,7 @@ KillAllScripts()
     Process, Close, %sleepBlockerPid%
     Process, Close, %discordManagerPid%
     Process, Close, %discordFailsafePid%
+    OnExit("KillAllScripts", 0)
     ExitApp, 0
 }
 
