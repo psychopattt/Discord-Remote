@@ -1,6 +1,5 @@
-﻿#NoEnv
-#Include *i %A_ScriptDir%\DiscordChannels.ahk
-#Include *i %A_ScriptDir%\DiscordMessages.ahk
+﻿#Include "*i %A_ScriptDir%\DiscordChannels.ahk"
+#Include "*i %A_ScriptDir%\DiscordMessages.ahk"
 
 GetOrCreateDiscordHandle()
 {
@@ -8,13 +7,15 @@ GetOrCreateDiscordHandle()
     global discordHandle
     discordHandle := WinExist("ahk_exe Discord.exe")
 
-    if (!discordHandle) { ; Find Discord.exe and run it
-        Loop, Files, %A_AppData%\..\Local\Discord\Discord.exe, R
+    if (!discordHandle)
+    {
+        ; Find Discord.exe and start it
+        loop files A_AppData . "\..\Local\Discord\Discord.exe", "R"
         {
-            Run, %A_LoopFileFullPath%,,, discordPid
-            WinWait, ahk_pid %discordPid% ; Wait until window exists
-            WinGet, discordHandle, ID, ahk_pid %discordPid% ; Get window Id
-            Sleep, (actionTime * 100) ; Wait for Discord to be started
+            Run(A_LoopFileFullPath,,, &discordPid)
+            WinWait("ahk_pid " . discordPid) ; Wait until window exists
+            discordHandle := WinGetID("ahk_pid " . discordPid) ; Get window Id
+            Sleep(actionTime * 100) ; Wait for Discord to be started
             break
         }
     }
@@ -24,10 +25,10 @@ GetDiscordHandle()
 {
     global
 
-    if (!WinExist("ahk_id" discordHandle)) {
-        while, (!WinExist("ahk_exe Discord.exe")) {
-            Sleep, %actionTime%
-        }
+    if (!WinExist("ahk_id " . discordHandle))
+    {
+        while !WinExist("ahk_exe Discord.exe")
+            Sleep(actionTime)
 
         discordHandle := WinExist("ahk_exe Discord.exe")
     }
@@ -37,21 +38,22 @@ FocusDiscord()
 {
     global discordHandle
     GetDiscordHandle()
-    WinWait, ahk_id %discordHandle% ; Wait until window exists
-    WinActivate, ahk_id %discordHandle% ; Activate window
-    WinSet, Top,, ahk_id %discordHandle% ; Bring window to front
-    WinWaitActive, ahk_id %discordHandle% ; Wait until window focused
+    discordWinTitle := "ahk_id " . discordHandle
+    WinWait(discordWinTitle) ; Wait until window exists
+    WinActivate(discordWinTitle) ; Activate window
+    WinMoveTop(discordWinTitle) ; Bring window to front
+    WinWaitActive(discordWinTitle) ; Wait until window focused
 }
 
 GetCommand()
 {
-    savedClipboard := ClipboardAll
-    Clipboard := ""
+    savedClipboard := ClipboardAll()
+    A_Clipboard := ""
 
     CopyLastMessage()
-    command := Clipboard
+    command := A_Clipboard
 
-    Clipboard := savedClipboard
+    A_Clipboard := savedClipboard
     savedClipboard := ""
 
     return LTrim(command)
@@ -60,28 +62,28 @@ GetCommand()
 CopyLastMessage()
 {
     global actionTime
-    SendInput, {Esc}{Up}^a
-    Sleep, %actionTime%
-    SendInput, ^c{Esc}
-    ClipWait, (actionTime / 1000)
+    SendInput("{Esc}{Up}^a")
+    Sleep(actionTime)
+    SendInput("^c{Esc}")
+    ClipWait(actionTime / 1000, 0)
 }
 
 DeleteLastMessage()
 {
     global actionTime
-    SendInput, {Tab}{Up}
-    Sleep, %actionTime%
-    SendInput, {BackSpace}{Enter}
-    Sleep, %actionTime%
+    SendInput("{Tab}{Up}")
+    Sleep(actionTime)
+    SendInput("{BackSpace}{Enter}")
+    Sleep(actionTime)
 }
 
 WriteCurrentChannel(message)
 {
     global actionTime
     FocusDiscord()
-    Sleep, %actionTime%
-    SendInput, %message%{Enter}
-    Sleep, %actionTime%
+    Sleep(actionTime)
+    SendInput(message . "{Enter}")
+    Sleep(actionTime)
 }
 
 WriteOutput(message)
