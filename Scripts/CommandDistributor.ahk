@@ -21,7 +21,12 @@ ExecuteCommand(command, commandsPath)
     commandPath := commandsPath . commandName . ".ahk"
 
     if (FileExist(commandPath))
-        RunWait("`"" . commandPath . "`" `"" . commandParameters . "`"")
+    {
+        RunWait(
+            A_AhkPath . " /script " . "`"" . commandPath .
+            "`" `"" . commandParameters . "`""
+        )
+    }
 }
 
 ExtractCommandParts(command)
