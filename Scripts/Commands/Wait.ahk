@@ -1,4 +1,4 @@
-﻿#NoEnv
+﻿waitTime := A_Args.Has(1) ? A_Args[1] : 0
 
-waitTime := A_Args[1]
-Sleep, %waitTime%
+if (IsInteger(waitTime))
+    Sleep(waitTime)
