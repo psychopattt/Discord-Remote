@@ -1,14 +1,13 @@
-﻿#NoEnv
-#Persistent
-#SingleInstance Force
-
-#Include, %A_ScriptDir%\DiscordControls.ahk
+﻿#SingleInstance Force
+#Include "%A_ScriptDir%\DiscordControls.ahk"
 
 actionTime := 100
 discordHandle := -1
 failsafeRequired := true
-OnMessage(0x2BED, "ResetFailsafe")
-OnMessage(0xDEAD, "TriggerFailsafe")
+
+Persistent(true)
+OnMessage(0x2BED, ResetFailsafe)
+OnMessage(0xDEAD, TriggerFailsafe)
 Main()
 
 Main()
@@ -16,24 +15,25 @@ Main()
     global failsafeRequired
     failCheckInterval := 60000
 
-    loop {
+    loop
+    {
         if (failsafeRequired) {
             TriggerFailsafe()
         } else {
             failsafeRequired := true
         }
 
-        Sleep, %failCheckInterval%
+        Sleep(failCheckInterval)
     }
 }
 
-ResetFailsafe()
+ResetFailsafe(*)
 {
     global
     failsafeRequired := false
 }
 
-TriggerFailsafe()
+TriggerFailsafe(*)
 {
     SendStopCaptureCommands()
     GetOrCreateDiscordHandle()
