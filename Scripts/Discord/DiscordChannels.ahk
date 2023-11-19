@@ -1,10 +1,8 @@
-﻿#NoEnv
-
-NavigateToChannel(channelName)
+﻿NavigateToChannel(channelName)
 {
     global actionTime
-    SendInput, ^k{#}%channelName%{Enter}
-    Sleep, %actionTime%
+    SendInput("^k{#}" . channelName . "{Enter}")
+    Sleep(actionTime)
 }
 
 NavigateToInChannel()
