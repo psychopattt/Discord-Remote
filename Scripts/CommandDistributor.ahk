@@ -17,7 +17,7 @@ ExecuteCommand(command, commandsPath)
 {
     commandParts := ExtractCommandParts(command)
     commandName := StrTitle(commandParts[1])
-    commandParameters := commandParts[2]
+    commandParameters := commandParts.Has(2) ? commandParts[2] : ""
     commandPath := commandsPath . commandName . ".ahk"
 
     if (FileExist(commandPath))
