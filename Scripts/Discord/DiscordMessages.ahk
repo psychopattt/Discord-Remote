@@ -1,16 +1,12 @@
-﻿#NoEnv
-
-SendMessage(message)
+﻿SendMessage(message)
 {
-    DetectHiddenWindows, On
-    WinGet, allAhkProcesses, List, ahk_class AutoHotkey
+    DetectHiddenWindows(true)
+    ahkProcesses := WinGetList("ahk_class AutoHotkey")
+    
+    for ahkProcessId in ahkProcesses
+        PostMessage(message,,,, "ahk_id " . ahkProcessId)
 
-    Loop, % allAhkProcesses {
-        ahkProcessHandle := allAhkProcesses%A_Index%
-        PostMessage, %message%,,,, ahk_id %ahkProcessHandle%
-    }
-
-    DetectHiddenWindows, Off
+    DetectHiddenWindows(false)
 }
 
 SendStopCaptureCommands() {
