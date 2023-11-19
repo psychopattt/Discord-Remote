@@ -7,15 +7,20 @@ DirCreate(".\Scripts\Commands")
 */
 
 Persistent(true)
-SetWorkingDir(A_WorkingDir . "\Scripts\")
-
-Run(A_AhkPath . " SleepBlocker.ahk",,, &sleepBlockerPid)
-Run(A_AhkPath . " Discord\DiscordManager.ahk",,, &discordManagerPid)
-Run(A_AhkPath . " Discord\DiscordFailsafe.ahk",,, &discordFailsafePid)
-
 ^!F4::KillAllScripts()
 OnExit(KillAllScripts, 1)
 OnMessage(0xD1E0, KillAllScripts)
+SetWorkingDir(A_WorkingDir . "\Scripts\")
+
+sleepBlockerPid := RunSubScript("SleepBlocker.ahk")
+discordManagerPid := RunSubScript("Discord\DiscordManager.ahk")
+discordFailsafePid := RunSubScript("Discord\DiscordFailsafe.ahk")
+
+RunSubScript(subPath)
+{
+    Run(A_AhkPath . " /script " . subPath,,, &subScriptPid)
+    return subScriptPid
+}
 
 KillAllScripts(*)
 {
