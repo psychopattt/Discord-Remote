@@ -1,22 +1,43 @@
-try { FileInstall(".\Scripts\CommandDistributor.ahk", ".\Scripts\CommandDistributor.ahk", 0)
-} try { FileInstall(".\Scripts\SleepBlocker.ahk", ".\Scripts\SleepBlocker.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Bulk.ahk", ".\Scripts\Commands\Bulk.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Clear.ahk", ".\Scripts\Commands\Clear.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Click.ahk", ".\Scripts\Commands\Click.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Focus.ahk", ".\Scripts\Commands\Focus.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Help.ahk", ".\Scripts\Commands\Help.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Input.ahk", ".\Scripts\Commands\Input.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Mouse.ahk", ".\Scripts\Commands\Mouse.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Ping.ahk", ".\Scripts\Commands\Ping.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Screenshot.ahk", ".\Scripts\Commands\Screenshot.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Search.ahk", ".\Scripts\Commands\Search.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Shutdown.ahk", ".\Scripts\Commands\Shutdown.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Sleep.ahk", ".\Scripts\Commands\Sleep.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Text.ahk", ".\Scripts\Commands\Text.ahk", 0)
-} try { FileInstall(".\Scripts\Commands\Wait.ahk", ".\Scripts\Commands\Wait.ahk", 0)
-} try { FileInstall(".\Scripts\Discord\DiscordChannels.ahk", ".\Scripts\Discord\DiscordChannels.ahk", 0)
-} try { FileInstall(".\Scripts\Discord\DiscordControls.ahk", ".\Scripts\Discord\DiscordControls.ahk", 0)
-} try { FileInstall(".\Scripts\Discord\DiscordFailsafe.ahk", ".\Scripts\Discord\DiscordFailsafe.ahk", 0)
-} try { FileInstall(".\Scripts\Discord\DiscordManager.ahk", ".\Scripts\Discord\DiscordManager.ahk", 0)
-} try { FileInstall(".\Scripts\Discord\DiscordMessages.ahk", ".\Scripts\Discord\DiscordMessages.ahk", 0)
+try {
+FileInstall(".\Scripts\CommandDistributor.ahk", ".\Scripts\CommandDistributor.ahk", 0)
+} try {
+FileInstall(".\Scripts\SleepBlocker.ahk", ".\Scripts\SleepBlocker.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Bulk.ahk", ".\Scripts\Commands\Bulk.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Clear.ahk", ".\Scripts\Commands\Clear.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Click.ahk", ".\Scripts\Commands\Click.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Focus.ahk", ".\Scripts\Commands\Focus.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Help.ahk", ".\Scripts\Commands\Help.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Input.ahk", ".\Scripts\Commands\Input.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Mouse.ahk", ".\Scripts\Commands\Mouse.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Ping.ahk", ".\Scripts\Commands\Ping.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Screenshot.ahk", ".\Scripts\Commands\Screenshot.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Search.ahk", ".\Scripts\Commands\Search.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Shutdown.ahk", ".\Scripts\Commands\Shutdown.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Sleep.ahk", ".\Scripts\Commands\Sleep.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Text.ahk", ".\Scripts\Commands\Text.ahk", 0)
+} try {
+FileInstall(".\Scripts\Commands\Wait.ahk", ".\Scripts\Commands\Wait.ahk", 0)
+} try {
+FileInstall(".\Scripts\Discord\DiscordChannels.ahk", ".\Scripts\Discord\DiscordChannels.ahk", 0)
+} try {
+FileInstall(".\Scripts\Discord\DiscordControls.ahk", ".\Scripts\Discord\DiscordControls.ahk", 0)
+} try {
+FileInstall(".\Scripts\Discord\DiscordFailsafe.ahk", ".\Scripts\Discord\DiscordFailsafe.ahk", 0)
+} try {
+FileInstall(".\Scripts\Discord\DiscordManager.ahk", ".\Scripts\Discord\DiscordManager.ahk", 0)
+} try {
+FileInstall(".\Scripts\Discord\DiscordMessages.ahk", ".\Scripts\Discord\DiscordMessages.ahk", 0)
 } 

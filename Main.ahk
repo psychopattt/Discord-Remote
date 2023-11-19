@@ -43,7 +43,7 @@ GenerateInstallScript()
         filePath := ".\Scripts\" . A_LoopFilePath
 
         FileAppend(
-            "try { FileInstall(`"" . filePath . "`", `"" .
+            "try {`nFileInstall(`"" . filePath . "`", `"" .
             filePath . "`", 0)`n} ", installScriptPath
         )
     }
