@@ -1,11 +1,10 @@
-﻿#NoEnv
-#Persistent
-#SingleInstance Force
+﻿#SingleInstance Force
 
+Persistent(true)
 recentlyUpdated := true
-OnMessage(0x2BED, "Update")
-OnMessage(0xCA01, "Update")
-SetTimer, CheckPingRequired, 29000
+OnMessage(0x2BED, Update)
+OnMessage(0xCA01, Update)
+SetTimer(CheckPingRequired, 29000)
 
 CheckPingRequired()
 {
@@ -19,7 +18,7 @@ CheckPingRequired()
     }
 }
 
-Update()
+Update(*)
 {
     global recentlyUpdated
     recentlyUpdated := true
@@ -27,6 +26,7 @@ Update()
 
 ShakeMouse()
 {
-    MouseMove, 1, 0, 1, R
-    MouseMove, -1, 0, 1, R
+    MouseMove(1, 0, 1, "R")
+    Sleep(5)
+    MouseMove(-1, 0, 1, "R")
 }
