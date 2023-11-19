@@ -1,29 +1,20 @@
-﻿#NoEnv
-
-#Include, %A_ScriptDir%\..\Discord\DiscordControls.ahk
-#Include, %A_ScriptDir%\..\Discord\DiscordChannels.ahk
-#Include, %A_ScriptDir%\..\Discord\DiscordMessages.ahk
+﻿#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
+#Include "%A_ScriptDir%\..\Discord\DiscordChannels.ahk"
+#Include "%A_ScriptDir%\..\Discord\DiscordMessages.ahk"
 
 actionTime := 100
-parameter := A_Args[1]
-parameter := Trim(parameter)
-
-if (parameter != "") {
-    message := "Shutdown [Lock] signal received"
-} else {
-    message := "Shutdown signal received"
-}
+discordHandle := -1
+lock := A_Args.Has(1) && Trim(A_Args[1]) != ""
 
 FocusDiscord()
-Sleep, %actionTime%
+Sleep(actionTime)
 NavigateToInChannel()
-Sleep, %actionTime%
+Sleep(actionTime)
 DeleteLastMessage()
-Sleep, %actionTime%
-WriteOutput(message)
-Sleep, (actionTime * 50) ; Waits for everything to complete
+Sleep(actionTime)
+WriteOutput("Shutdown " . (lock ? "[Lock] " : "") . "signal received")
+Sleep(actionTime * 30) ; Wait for everything to complete
 SendShutdownSignal()
 
-if (parameter != "") {
+if (lock)
     DllCall("user32.dll\LockWorkStation")
-}
