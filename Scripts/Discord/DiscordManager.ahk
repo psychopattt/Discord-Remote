@@ -3,7 +3,6 @@
 #Include "%A_ScriptDir%\DiscordControls.ahk"
 
 actionTime := 100
-discordHandle := -1
 captureCommands := false
 
 Persistent(true)

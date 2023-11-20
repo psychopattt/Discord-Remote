@@ -2,7 +2,6 @@
 #Include "%A_ScriptDir%\..\Discord\DiscordChannels.ahk"
 
 actionTime := 100
-discordHandle := -1
 parameters := A_Args.Has(1) ? StrSplit(A_Args[1], A_Space) : []
 
 SendMode("Event")

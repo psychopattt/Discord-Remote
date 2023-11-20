@@ -25,6 +25,9 @@ GetDiscordHandle()
 {
     global
 
+    if (!IsSet(discordHandle))
+        discordHandle := -1
+
     if (!WinExist("ahk_id " . discordHandle))
     {
         while !WinExist("ahk_exe Discord.exe")

@@ -3,7 +3,6 @@
 #Include "%A_ScriptDir%\..\Discord\DiscordMessages.ahk"
 
 actionTime := 100
-discordHandle := -1
 lock := A_Args.Has(1) && Trim(A_Args[1]) != ""
 
 FocusDiscord()
