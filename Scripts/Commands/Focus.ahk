@@ -1,57 +1,50 @@
-﻿#NoEnv
-
-#Include, %A_ScriptDir%\..\Discord\DiscordControls.ahk
-#Include, %A_ScriptDir%\..\Discord\DiscordChannels.ahk
+﻿#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
+#Include "%A_ScriptDir%\..\Discord\DiscordChannels.ahk"
 
 actionTime := 100
-parameterString := A_Args[1]
-parameters := StrSplit(parameterString, " ")
-mode := parameters[1]
-app := parameters[2]
-mode := Trim(mode)
-app := Trim(app)
+parameters := A_Args.Has(1) ? StrSplit(A_Args[1], A_Space) : []
+mode := parameters.Has(1) ? StrLower(Trim(parameters[1])) : ""
+app := parameters.Has(2) ? Trim(parameters[2]) : ""
 
-if (mode != "") {
-    StringLower, mode, mode
-}
-
-if (app == "") {
-    if (mode == "h" || mode == "hidden" || mode == "a" || mode == "all") {
-        DetectHiddenWindows, On
-        GatherRunningProcesses()
-    } else if (mode == "") {
-        GatherRunningProcesses()
-    } else {
-        WriteFocusErrorMessage("Error - Focus: Invalid mode """ . mode . """ or missing process name")
+if (app == "")
+{
+    if (mode == "h" || mode == "hidden" || mode == "a" || mode == "all")
+    {
+        DetectHiddenWindows(true)
+        mode := ""
     }
+    
+    if (mode == "")
+        GatherRunningProcesses()
+    else
+        WriteFocusErrorMessage("Error - Focus: Invalid mode `"" . mode . "`" or missing process name")
 }
-
-if (app != "" && mode != "") {
+else if (mode != "")
+{
     FocusProcess(mode, app)
 }
 
 GatherRunningProcesses()
 {
-    global actionTime
-    actionTime *= 6 ; Ensure there's time to write all characters
     pageCounter := 1
-
-    processes := ""
-    VarSetCapacity(processes, 5000) ; Reserve 5 KB of memory
+    VarSetStrCapacity(&processes, 3000) ; Reserve 3 KB of memory
     processes := "``````Running processes [" . pageCounter . "]:{Enter}"
     
     StartProcessOutput()
-    WinGet, handles, List
+    handles := WinGetList()
 
-    Loop, % handles {
-        if (StrLen(processes) > 1000) { ; Split processes into different messages
+    for handle in handles
+    {
+        if (StrLen(processes) > 1000) ; Split processes into different messages
+        {
             OutputRunningProcesses(processes)
             processes := "``````Running processes [" . ++pageCounter . "]:{Enter}"
         }
 
-        handle := handles%A_Index%
-        WinGet, name, ProcessName, ahk_id %handle%
-        WinGet, pid, PID, ahk_id %handle%
+        name := "[Read Denied]"
+        try name := WinGetProcessName("ahk_id " . handle)
+
+        pid := WinGetPID("ahk_id " . handle)
         processes .= name . ": PID = " . pid . ", Handle = " . handle . "{Enter}"
     }
 
@@ -62,6 +55,9 @@ GatherRunningProcesses()
 
 StartProcessOutput()
 {
+    global actionTime
+    actionTime *= 6 ; Ensure there's time to write all characters
+
     FocusDiscord()
     NavigateToOutChannel()
 }
@@ -70,50 +66,51 @@ OutputRunningProcesses(processes)
 {
     global actionTime
     WriteCurrentChannel(processes . "``````{Enter}")
-    Sleep, (actionTime * 3)
+    Sleep(actionTime * 3)
 }
 
 StopProcessOutput()
 {
+    global actionTime
+    actionTime := Integer(actionTime / 6) ; Restore original delay
+
     FocusDiscord()
     NavigateToInChannel()
 }
 
 FocusProcess(mode, app)
 {
-    switch (mode)
+    switch mode, false
     {
-        Case "h", "handle":
-            if (!InStr(app, "0x")) {
-                app := "0x" . app
-            }
-
-            DetectHiddenWindows, On
-            appHandle := WinExist("ahk_id" app)           
-        Case "n", "name":
-            if (!InStr(app, ".")) {
-                app := app . ".exe"
-            }
-
-            appHandle := WinExist("ahk_exe" app)
-        Case "p", "pid":
-            appHandle := WinExist("ahk_pid" app)
-        Default:
-            WriteFocusErrorMessage("Error - Focus: Invalid mode """ . mode . """")
+        case "p", "pid":
+            appHandle := WinExist("ahk_pid " . app)
+        case "h", "handle":
+            DetectHiddenWindows(true)
+            appHandle := WinExist("ahk_id " . app)
+        case "n", "name":
+            appHandle := WinExist("ahk_exe " . (InStr(app, ".") ? app : app . ".exe"))
+        default:
+            WriteFocusErrorMessage("Error - Focus: Invalid mode `"" . mode . "`"")
             return
     }
 
-    if (appHandle) {
-        WinActivate, ahk_id %appHandle%
-        WinSet, Top,, ahk_id %appHandle%
-    } else {
-        WriteFocusErrorMessage("Error - Focus: The process """ . app . """ (mode """ . mode . """) could not be found")
+    if (!appHandle)
+    {
+        WriteFocusErrorMessage(
+            "Error - Focus: The process `"" . app .
+            "`" (mode `"" . mode . "`") could not be found"
+        )
+
+        return
     }
+    
+    WinActivate("ahk_id " . appHandle)
+    WinMoveTop("ahk_id " . appHandle)
 }
 
 WriteFocusErrorMessage(message)
 {
     global actionTime
     WriteOutput(message)
-    Sleep, %actionTime%
+    Sleep(actionTime)
 }

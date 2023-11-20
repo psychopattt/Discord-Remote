@@ -86,13 +86,14 @@ WriteCommandHelp(command)
             helpMessage := "
             (
                 Focus a specific window (bring it to the foreground)
+                Can also output a list of running processes
                 Options:
                 Mode App: Specifies the detection mode and the app identifier
                   Mode: Handle (H), Name (N) or PID (P)
                     The handle is always unique and can focus hidden windows
                   App: The identifier of the app in the current mode
-                Hidden (H) or All (A): Outputs a list of all the running processes, including hidden ones
-                Default: Outputs a list of all the visible running processes
+                Hidden (H) or All (A): Outputs a list of all running processes, including hidden ones
+                Default: Outputs a list of all visible running processes
                   There might be more processes when running as administrator
             )"
         case "input":
