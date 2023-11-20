@@ -1,20 +1,17 @@
-﻿#NoEnv
-
-#Include, %A_ScriptDir%\..\Discord\DiscordControls.ahk
-#Include, %A_ScriptDir%\..\Discord\DiscordChannels.ahk
+﻿#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
+#Include "%A_ScriptDir%\..\Discord\DiscordChannels.ahk"
 
 actionTime := 100
-parameter := A_Args[1]
-StringLower, parameter, parameter
+parameter := A_Args.Has(1) ? Trim(A_Args[1]) : ""
 
-Switch (parameter)
+switch parameter, false
 {
-    Case "i", "in", "input":
+    case "i", "in", "input":
         ClearInput()
-    Case "*", "all", "everything":
+    case "*", "all", "everything":
         ClearInput()
         ClearOutput()
-    Default:
+    default:
         ClearOutput()
 }
 
@@ -36,15 +33,16 @@ ClearOutput()
 ClearCurrentChannel()
 {
     global actionTime
-    Sleep, %actionTime%
+    Sleep(actionTime)
     command := GetCommand()
 
-    while (command != "")
+    while command != ""
     {
         FocusDiscord()
+        Sleep(actionTime)
         DeleteLastMessage()
         command := GetCommand()
     }
 
-    Sleep, %actionTime%
+    Sleep(actionTime)
 }
