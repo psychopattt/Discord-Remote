@@ -76,8 +76,9 @@ WriteCommandHelp(command)
                 Works just like AutoHotKey's Click command
                 Options:
                 Up (U) or Down (D): Specifies weither to click down or up instead of both
-                Left (L), Right (R), Middle (M), X1 or X2: Specifies which button to click (X1 and X2 are side buttons)
+                Left (L), Right (R), Middle (M), WheelUp (WU), WheelDown (WD), X1 or X2: Specifies which button to use (X1 and X2 are side buttons)
                 X Y: Specifies where to click (If present, must be before the Number option)
+                Relative (Rel): Use X and Y as relative coordinates
                 Number: Specifies how many clicks to do
                 Default: Sends a single left click at the current mouse position
             )"
