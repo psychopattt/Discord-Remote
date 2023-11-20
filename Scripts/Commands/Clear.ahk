@@ -33,14 +33,14 @@ ClearOutput()
 ClearCurrentChannel()
 {
     global actionTime
-    Sleep(actionTime)
+    Sleep(actionTime * 3)
     command := GetCommand()
 
     while command != ""
     {
-        FocusDiscord()
-        Sleep(actionTime)
+        Sleep(actionTime * 2)
         DeleteLastMessage()
+        Sleep(actionTime * 2)
         command := GetCommand()
     }
 
