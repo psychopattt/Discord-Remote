@@ -4,7 +4,7 @@
 
 actionTime := 300
 commandsPath := A_ScriptDir . "\"
-command := A_Args.Has(1) ? StrTitle(A_Args[1]) : ""
+command := A_Args.Has(1) ? StrTitle(Trim(A_Args[1])) : ""
 
 if (command == "")
     WriteCommandHelp("Help")
