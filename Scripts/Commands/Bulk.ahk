@@ -1,23 +1,19 @@
-﻿#NoEnv
-
-#Include, %A_ScriptDir%\..\CommandDistributor.ahk
-#Include, %A_ScriptDir%\..\Discord\DiscordControls.ahk
-#Include, %A_ScriptDir%\..\Discord\DiscordChannels.ahk
+﻿#Include "%A_ScriptDir%\..\CommandDistributor.ahk"
+#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
+#Include "%A_ScriptDir%\..\Discord\DiscordChannels.ahk"
 
 actionTime := 100
-commandsString := A_Args[1]
-commandsArray := StrSplit(commandsString, "`n", "`r")
 commandsPath := A_ScriptDir . "\"
+commands := A_Args.Has(1) ? StrSplit(A_Args[1], "`n", "`r") : []
 
-for i, command in commandsArray
+for command in commands
 {
-    if (!CommandExists(command, commandsPath)) {
+    if (!CommandExists(command, commandsPath))
         WriteOutput("Error - Invalid command: " . command)
-    } else {
+    else
         ExecuteCommand(command, commandsPath)
-    }
 
-    Sleep, (actionTime / 4)
+    Sleep(actionTime / 4)
 }
 
-Sleep, (actionTime * 2)
+Sleep(actionTime * 2)
