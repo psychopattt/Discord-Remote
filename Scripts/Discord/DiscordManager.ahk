@@ -34,6 +34,7 @@ Main()
             else if (command != "")
             {
                 DeleteLastMessage()
+                command := StrReplace(SubStr(command, 1, 30), "``")
                 WriteOutput("Error - Invalid command: " . command)
             }
         }
