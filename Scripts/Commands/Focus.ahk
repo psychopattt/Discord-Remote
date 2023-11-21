@@ -16,7 +16,7 @@ if (app == "")
     }
     
     if (mode == "")
-        GatherRunningProcesses()
+        OutputRunningProcesses()
     else
         WriteFocusErrorMessage("Error - Focus: Invalid mode `"" . mode . "`" or missing process name")
 }
@@ -25,33 +25,71 @@ else if (mode != "")
     FocusProcess(mode, app)
 }
 
+class RunningProcess
+{
+    handle := -1
+    name := ""
+    pid := -1
+
+    __New(handle, name, pid)
+    {
+        this.handle := handle
+        this.name := name
+        this.pid := pid
+    }
+
+    ToString()
+    {
+        return this.name . ": PID = " . this.pid .
+        ", Handle = " . this.handle
+    }
+}
+
 GatherRunningProcesses()
 {
-    pageCounter := 1
-    VarSetStrCapacity(&processes, 3000) ; Reserve 3 KB of memory
-    processes := "``````Running processes [" . pageCounter . "]:{Enter}"
-    
-    StartProcessOutput()
+    processes := []
     handles := WinGetList()
+    processes.Capacity := handles.Length
 
     for handle in handles
     {
-        if (StrLen(processes) > 1000) ; Split processes into different messages
+        if (WinExist("ahk_id " . handle)) ; Ensure the process is running
         {
-            SendResetFailsafe()
-            OutputRunningProcesses(processes)
-            processes := "``````Running processes [" . ++pageCounter . "]:{Enter}"
+            try
+                name := WinGetProcessName("ahk_id " . handle)
+            catch
+                name := "[Read Denied]"
+
+            pid := WinGetPID("ahk_id " . handle)
+            processes.Push(RunningProcess(handle, name, pid))
         }
-
-        name := "[Read Denied]"
-        try name := WinGetProcessName("ahk_id " . handle)
-
-        pid := WinGetPID("ahk_id " . handle)
-        processes .= name . ": PID = " . pid . ", Handle = " . handle . "{Enter}"
     }
 
-    OutputRunningProcesses(processes)
-    processes := "" ; Release memory
+    return processes
+}
+
+OutputRunningProcesses()
+{
+    pageCounter := 1
+    VarSetStrCapacity(&processesPage, 3000) ; Reserve 3 KB of memory
+    processesPage := "``````Running processes [" . pageCounter . "]:{Enter}"
+    processes := GatherRunningProcesses()
+    StartProcessOutput()
+
+    while processes.Length > 0
+    {
+        if (StrLen(processesPage) > 1000) ; Split processes into different messages
+        {
+            SendResetFailsafe()
+            OutputProcessesPage(processesPage)
+            processesPage := "``````Running processes [" . ++pageCounter . "]:{Enter}"
+        }
+
+        processesPage .= processes.Pop().ToString() . "{Enter}"
+    }
+
+    OutputProcessesPage(processesPage)
+    processesPage := "" ; Release memory
     StopProcessOutput()
 }
 
@@ -64,10 +102,10 @@ StartProcessOutput()
     NavigateToOutChannel()
 }
 
-OutputRunningProcesses(processes)
+OutputProcessesPage(processesPage)
 {
     global processDelay
-    WriteCurrentChannel(processes . "``````{Enter}")
+    WriteCurrentChannel(processesPage . "``````{Enter}")
     Sleep(processDelay * 3)
 }
 
