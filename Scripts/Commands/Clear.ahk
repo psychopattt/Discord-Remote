@@ -1,7 +1,7 @@
-﻿#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
+﻿#Include "%A_ScriptDir%\..\Config.ini"
+#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
 #Include "%A_ScriptDir%\..\Discord\DiscordChannels.ahk"
 
-actionTime := 100
 parameter := A_Args.Has(1) ? Trim(A_Args[1]) : ""
 
 switch parameter, false
@@ -32,8 +32,8 @@ ClearOutput()
 
 ClearCurrentChannel()
 {
-    global actionTime
-    Sleep(actionTime)
+    global processDelay
+    Sleep(processDelay)
     command := GetCommand()
 
     while command != ""
@@ -43,5 +43,5 @@ ClearCurrentChannel()
         command := GetCommand()
     }
 
-    Sleep(actionTime)
+    Sleep(processDelay)
 }

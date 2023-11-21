@@ -3,7 +3,7 @@
 
 GetOrCreateDiscordHandle()
 {
-    global actionTime
+    global processDelay
     global discordHandle
     discordHandle := WinExist("ahk_exe Discord.exe")
 
@@ -15,7 +15,7 @@ GetOrCreateDiscordHandle()
             Run(A_LoopFileFullPath,,, &discordPid)
             WinWait("ahk_pid " . discordPid) ; Wait until window exists
             discordHandle := WinGetID("ahk_pid " . discordPid) ; Get window Id
-            Sleep(actionTime * 100) ; Wait for Discord to be started
+            Sleep(processDelay * 100) ; Wait for Discord to be started
             break
         }
     }
@@ -31,7 +31,7 @@ GetDiscordHandle()
     if (!WinExist("ahk_id " . discordHandle))
     {
         while !WinExist("ahk_exe Discord.exe")
-            Sleep(actionTime)
+            Sleep(processDelay)
 
         discordHandle := WinExist("ahk_exe Discord.exe")
     }
@@ -64,30 +64,30 @@ GetCommand()
 
 CopyLastMessage()
 {
-    global actionTime
+    global processDelay
     SendInput("{Esc}{Up}^a")
-    Sleep(actionTime)
+    Sleep(processDelay)
     SendInput("^c{Esc}{Esc}")
-    ClipWait(actionTime / 1000, 0)
+    ClipWait(processDelay / 1000, 0)
 }
 
 DeleteLastMessage()
 {
-    global actionTime
+    global processDelay
     SendInput("{Tab}{Up}")
-    Sleep(actionTime)
+    Sleep(processDelay)
     SendInput("{BackSpace}{Enter}")
-    Sleep(actionTime * 8)
+    Sleep(processDelay * 8)
     SendInput("{Esc}{Esc}")
 }
 
 WriteCurrentChannel(message)
 {
-    global actionTime
+    global processDelay
     FocusDiscord()
-    Sleep(actionTime)
+    Sleep(processDelay)
     SendInput(message . "{Enter}")
-    Sleep(actionTime)
+    Sleep(processDelay)
 }
 
 WriteOutput(message)

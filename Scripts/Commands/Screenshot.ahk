@@ -1,7 +1,7 @@
-﻿#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
+﻿#Include "%A_ScriptDir%\..\Config.ini"
+#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
 #Include "%A_ScriptDir%\..\Discord\DiscordChannels.ahk"
 
-actionTime := 100
 parameters := A_Args.Has(1) ? StrSplit(A_Args[1], A_Space) : []
 
 SendMode("Event")
@@ -42,25 +42,25 @@ ValidateParameters(parameters)
 
 ScreenshotWholeScreen()
 {
-    global actionTime
+    global processDelay
     SendInput("#+s")
-    Sleep(actionTime * 10)
+    Sleep(processDelay * 10)
     SendInput("{Tab}{Tab}{Tab}{Tab}{Enter}")
-    Sleep(actionTime * 5)
+    Sleep(processDelay * 5)
     SendScreenshot("[Whole Screen]")
 }
 
 ScreenshotAroundMouse(parameters)
 {
-    global actionTime
+    global processDelay
     width := parameters[1]
     height := parameters[2]
     MouseGetPos(&mouseX, &mouseY)
 
     SendInput("#+s")
-    Sleep(actionTime * 10)
+    Sleep(processDelay * 10)
     MouseClickDrag("L", (-width / 2), (-height / 2), width, height, 0, "R")
-    Sleep(actionTime * 5)
+    Sleep(processDelay * 5)
 
     MouseMove(mouseX, mouseY, 0)
     SendScreenshot("[Around Mouse], {" . width . ", " . height . "}")
@@ -68,7 +68,7 @@ ScreenshotAroundMouse(parameters)
 
 ScreenshotSpecifiedZone(parameters)
 {
-    global actionTime
+    global processDelay
     x := parameters[1]
     y := parameters[2]
     width := parameters[3]
@@ -76,9 +76,9 @@ ScreenshotSpecifiedZone(parameters)
     MouseGetPos(&mouseX, &mouseY)
 
     SendInput("#+s")
-    Sleep(actionTime * 10)
+    Sleep(processDelay * 10)
     MouseClickDrag("L", x, y, (x + width), (y + height), 0)
-    Sleep(actionTime * 5)
+    Sleep(processDelay * 5)
 
     MouseMove(mouseX, mouseY, 0)
     SendScreenshot("[Specified Zone], (" . x . ", " . y . "), {" . width . ", " . height . "}")
@@ -86,14 +86,14 @@ ScreenshotSpecifiedZone(parameters)
 
 SendScreenshot(message)
 {
-    global actionTime
+    global processDelay
     FocusDiscord()
     NavigateToOutChannel()
-    Sleep(actionTime)
+    Sleep(processDelay)
     SendInput("{Text}Screenshot " . message . ":")
     SendInput("^v")
-    Sleep(actionTime)
+    Sleep(processDelay)
     SendInput("{Enter}")
-    Sleep(actionTime)
+    Sleep(processDelay)
     NavigateToInChannel()
 }

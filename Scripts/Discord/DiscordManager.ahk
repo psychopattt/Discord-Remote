@@ -1,8 +1,8 @@
 ﻿#SingleInstance Force
+#Include "%A_ScriptDir%\..\Config.ini"
 #Include "%A_ScriptDir%\..\CommandDistributor.ahk"
 #Include "%A_ScriptDir%\DiscordControls.ahk"
 
-actionTime := 100
 captureCommands := false
 
 Persistent(true)

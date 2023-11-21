@@ -1,16 +1,16 @@
 ﻿NavigateToChannel(channelName)
 {
-    global actionTime
+    global processDelay
     SendInput("^k{#}" . channelName . "{Enter}")
-    Sleep(actionTime)
+    Sleep(processDelay)
 }
 
 NavigateToInChannel()
 {
-    NavigateToChannel("discord-remote-in")
+    NavigateToChannel(discordChannelIn)
 }
 
 NavigateToOutChannel()
 {
-    NavigateToChannel("discord-remote-out")
+    NavigateToChannel(discordChannelOut)
 }

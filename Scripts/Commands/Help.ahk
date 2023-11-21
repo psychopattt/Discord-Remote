@@ -1,8 +1,8 @@
-﻿#Include "%A_ScriptDir%\..\CommandDistributor.ahk"
+﻿#Include "%A_ScriptDir%\..\Config.ini"
+#Include "%A_ScriptDir%\..\CommandDistributor.ahk"
 #Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
 #Include "%A_ScriptDir%\..\Discord\DiscordChannels.ahk"
 
-actionTime := 300
 commandsPath := A_ScriptDir . "\"
 command := A_Args.Has(1) ? StrTitle(Trim(A_Args[1])) : ""
 
@@ -17,7 +17,7 @@ else
 
 WriteCommandHelp(command)
 {
-    global actionTime
+    global processDelay
 
     switch command, false
     {
@@ -171,5 +171,5 @@ WriteCommandHelp(command)
     }
 
     WriteOutput("``````Help - " . command . "{Enter}" . helpMessage . "``````{Enter}")
-    Sleep(actionTime * 3)
+    Sleep(processDelay * 10)
 }

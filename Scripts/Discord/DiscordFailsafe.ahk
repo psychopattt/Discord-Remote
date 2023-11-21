@@ -1,7 +1,7 @@
 ﻿#SingleInstance Force
+#Include "%A_ScriptDir%\..\Config.ini"
 #Include "%A_ScriptDir%\DiscordControls.ahk"
 
-actionTime := 100
 failsafeRequired := true
 
 Persistent(true)

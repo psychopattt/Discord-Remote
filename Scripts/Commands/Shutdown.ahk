@@ -1,18 +1,18 @@
-﻿#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
+﻿#Include "%A_ScriptDir%\..\Config.ini"
+#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
 #Include "%A_ScriptDir%\..\Discord\DiscordChannels.ahk"
 #Include "%A_ScriptDir%\..\Discord\DiscordMessages.ahk"
 
-actionTime := 100
 lock := A_Args.Has(1) && Trim(A_Args[1]) != ""
 
 FocusDiscord()
-Sleep(actionTime)
+Sleep(processDelay)
 NavigateToInChannel()
-Sleep(actionTime)
+Sleep(processDelay)
 DeleteLastMessage()
-Sleep(actionTime)
+Sleep(processDelay)
 WriteOutput("Shutdown " . (lock ? "[Lock] " : "") . "signal received")
-Sleep(actionTime * 30) ; Wait for everything to complete
+Sleep(processDelay * 30) ; Wait for everything to complete
 SendShutdownSignal()
 
 if (lock)

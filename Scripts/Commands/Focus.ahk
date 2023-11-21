@@ -1,7 +1,7 @@
-﻿#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
+﻿#Include "%A_ScriptDir%\..\Config.ini"
+#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
 #Include "%A_ScriptDir%\..\Discord\DiscordChannels.ahk"
 
-actionTime := 100
 parameters := A_Args.Has(1) ? StrSplit(A_Args[1], A_Space) : []
 mode := parameters.Has(1) ? StrLower(Trim(parameters[1])) : ""
 app := parameters.Has(2) ? Trim(parameters[2]) : ""
@@ -55,8 +55,8 @@ GatherRunningProcesses()
 
 StartProcessOutput()
 {
-    global actionTime
-    actionTime *= 6 ; Ensure there's time to write all characters
+    global processDelay
+    processDelay *= 6 ; Ensure there's time to write all characters
 
     FocusDiscord()
     NavigateToOutChannel()
@@ -64,15 +64,15 @@ StartProcessOutput()
 
 OutputRunningProcesses(processes)
 {
-    global actionTime
+    global processDelay
     WriteCurrentChannel(processes . "``````{Enter}")
-    Sleep(actionTime * 3)
+    Sleep(processDelay * 3)
 }
 
 StopProcessOutput()
 {
-    global actionTime
-    actionTime := Integer(actionTime / 6) ; Restore original delay
+    global processDelay
+    processDelay := Integer(processDelay / 6) ; Restore original delay
 
     FocusDiscord()
     NavigateToInChannel()
@@ -110,7 +110,7 @@ FocusProcess(mode, app)
 
 WriteFocusErrorMessage(message)
 {
-    global actionTime
+    global processDelay
     WriteOutput(message)
-    Sleep(actionTime)
+    Sleep(processDelay)
 }

@@ -1,7 +1,7 @@
-﻿#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
+﻿#Include "%A_ScriptDir%\..\Config.ini"
+#Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
 #Include "%A_ScriptDir%\..\Discord\DiscordChannels.ahk"
 
-actionTime := 100
 parameters := A_Args.Has(1) ? StrSplit(A_Args[1], A_Space) : []
 CoordMode("Mouse", "Screen")
 
