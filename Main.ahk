@@ -7,7 +7,7 @@ DirCreate(".\Scripts\Commands")
 */
 
 Persistent(true)
-^!F4::KillAllScripts()
+F4::KillAllScripts()
 OnExit(KillAllScripts, 1)
 OnMessage(0xD1E0, KillAllScripts)
 SetWorkingDir(A_WorkingDir . "\Scripts\")
