@@ -1,6 +1,8 @@
 try {
 FileInstall(".\Scripts\CommandDistributor.ahk", ".\Scripts\CommandDistributor.ahk", 0)
 } try {
+FileInstall(".\Scripts\Config.ini", ".\Scripts\Config.ini", 0)
+} try {
 FileInstall(".\Scripts\SleepBlocker.ahk", ".\Scripts\SleepBlocker.ahk", 0)
 } try {
 FileInstall(".\Scripts\Commands\Bulk.ahk", ".\Scripts\Commands\Bulk.ahk", 0)
