@@ -1,6 +1,7 @@
 ﻿#Include "%A_ScriptDir%\..\Config.ini"
 #Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
 #Include "%A_ScriptDir%\..\Discord\DiscordChannels.ahk"
+#Include "%A_ScriptDir%\..\Discord\DiscordMessages.ahk"
 
 parameters := A_Args.Has(1) ? StrSplit(A_Args[1], A_Space) : []
 mode := parameters.Has(1) ? StrLower(Trim(parameters[1])) : ""
@@ -37,6 +38,7 @@ GatherRunningProcesses()
     {
         if (StrLen(processes) > 1000) ; Split processes into different messages
         {
+            SendResetFailsafe()
             OutputRunningProcesses(processes)
             processes := "``````Running processes [" . ++pageCounter . "]:{Enter}"
         }

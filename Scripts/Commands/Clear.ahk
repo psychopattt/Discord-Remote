@@ -1,6 +1,7 @@
 ﻿#Include "%A_ScriptDir%\..\Config.ini"
 #Include "%A_ScriptDir%\..\Discord\DiscordControls.ahk"
 #Include "%A_ScriptDir%\..\Discord\DiscordChannels.ahk"
+#Include "%A_ScriptDir%\..\Discord\DiscordMessages.ahk"
 
 parameter := A_Args.Has(1) ? Trim(A_Args[1]) : ""
 
@@ -39,6 +40,7 @@ ClearCurrentChannel()
     while command != ""
     {
         FocusDiscord()
+        SendResetFailsafe()
         DeleteLastMessage()
         command := GetCommand()
     }
