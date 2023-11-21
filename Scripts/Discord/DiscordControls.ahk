@@ -67,7 +67,7 @@ CopyLastMessage()
     global actionTime
     SendInput("{Esc}{Up}^a")
     Sleep(actionTime)
-    SendInput("^c{Esc}")
+    SendInput("^c{Esc}{Esc}")
     ClipWait(actionTime / 1000, 0)
 }
 
@@ -77,7 +77,8 @@ DeleteLastMessage()
     SendInput("{Tab}{Up}")
     Sleep(actionTime)
     SendInput("{BackSpace}{Enter}")
-    Sleep(actionTime)
+    Sleep(actionTime * 8)
+    SendInput("{Esc}{Esc}")
 }
 
 WriteCurrentChannel(message)
