@@ -44,6 +44,7 @@ WriteCommandHelp(command)
                 Click
                 Focus
                 Help
+                Hide
                 Input
                 Mouse
                 Ping
@@ -95,6 +96,19 @@ WriteCommandHelp(command)
                 Hidden (H) or All (A): Outputs a list of all running processes, including hidden ones
                 Default: Outputs a list of all visible running processes
                   There might be more processes when running as administrator
+            )"
+        case "hide":
+            helpMessage := "
+            (
+                Changes the opacity of a specific window
+                Options:
+                Mode App: Specifies the detection mode and the app identifier
+                  Mode: Handle (H), Name (N) or PID (P)
+                    The handle is always unique and can focus hidden windows
+                  App: The identifier of the app in the current mode
+                Opacity: Specifies the desired opacity (between 0 and 255)
+                  If present, the opacity must appear after Mode and App
+                  If omitted or equal to -1, toggles between fully transparent and fully opaque
             )"
         case "input":
             helpMessage := "

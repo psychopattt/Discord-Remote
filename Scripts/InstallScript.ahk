@@ -15,6 +15,8 @@ FileInstall(".\Scripts\Commands\Focus.ahk", ".\Scripts\Commands\Focus.ahk", 0)
 } try {
 FileInstall(".\Scripts\Commands\Help.ahk", ".\Scripts\Commands\Help.ahk", 0)
 } try {
+FileInstall(".\Scripts\Commands\Hide.ahk", ".\Scripts\Commands\Hide.ahk", 0)
+} try {
 FileInstall(".\Scripts\Commands\Input.ahk", ".\Scripts\Commands\Input.ahk", 0)
 } try {
 FileInstall(".\Scripts\Commands\Mouse.ahk", ".\Scripts\Commands\Mouse.ahk", 0)
