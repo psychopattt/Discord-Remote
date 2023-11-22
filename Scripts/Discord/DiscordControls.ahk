@@ -19,6 +19,9 @@ GetOrCreateDiscordHandle()
             break
         }
     }
+
+    if (autoHideDiscord)
+        WinSetTransparent(0, "ahk_id " . discordHandle)
 }
 
 GetDiscordHandle()
