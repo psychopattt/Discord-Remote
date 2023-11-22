@@ -23,17 +23,18 @@ All the commands and their details can be seen remotely by using the Help comman
  - Help: Show how to use a command and list all commands
  - Bulk: Execute multiple commands at once
  - Clear: Remove all messages in the input and output channels
- - Click: Send a mouse click (Works like AutoHotKey's [Click](https://www.autohotkey.com/docs/v2/lib/Click.htm) function)
+ - Click: Send a mouse click (Similar to AutoHotKey's [Click](https://www.autohotkey.com/docs/v2/lib/Click.htm) function)
  - Focus: Focus a specific window (bring it to the foreground)
- - Input: Send inputs (Works like AutoHotKey's [SendInput](https://www.autohotkey.com/docs/v2/lib/Send.htm#SendInputDetail) function)
+ - Hide: Change the opacity of a specific window
+ - Input: Send inputs (Similar to AutoHotKey's [SendInput](https://www.autohotkey.com/docs/v2/lib/Send.htm#SendInputDetail) function)
  - Mouse: Move the mouse to the specified position on the screen
  - Ping: Send a simple ping to see if Discord Remote is running
  - Screenshot: Take a screenshot and send it in the output channel
  - Search: Search text in the Windows search box and start the first result
  - Shutdown: Terminate Discord Remote and optionally lock the PC
- - Text: Send text (Works like AutoHotKey's [SendText](https://www.autohotkey.com/docs/v2/lib/Send.htm#Text) function)
+ - Text: Send text (Similar to AutoHotKey's [SendText](https://www.autohotkey.com/docs/v2/lib/Send.htm#Text) function)
  - Wait: Wait for X milliseconds
- - Important details are available when using Discord Remote
+ - Details and examples are available when using Discord Remote
 
 ## Limitations
  - Doing anything is ***very*** slow
@@ -72,7 +73,12 @@ You can configure a few things in Discord Remote by modifying the config file
      - Open `./Scripts/Config.ini` and change `processDelay`
      - The delay is the amount of milliseconds to wait for the processing of certain inputs
 
- 3. Adding commands
+ 3. Automatically hide Discord when starting Discord Remote
+     - Open `./Scripts/Config.ini`
+     - Set `autoHideDiscord` to `true`
+     - Be aware that, while Discord is hidden, it is still focused and intercepting keyboard inputs
+
+ 4. Adding commands
      - You can add a new command by creating a file in the `./Scripts/Commands` directory
      - The name of the file will be the name of the command
      - The name must be a capital letter followed by lowercase letters and must not contain spaces
