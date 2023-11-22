@@ -46,14 +46,15 @@ All the commands and their details can be seen remotely by using the Help comman
      2. Create a channel named `discord-remote-out`
          - Everyone who has access to this channel will be able to read command results
  3. Download the [latest release of Discord Remote](https://github.com/psychopattt/Discord-Remote/releases/latest) (Discord-Remote.exe)
- 4. **Warning**: After the next step, your PC will be controlled by the scripts
+     - If you had a previous version of Discord Remote, you should delete its old `Scripts` directory
+ 5. **Warning**: After the next step, your PC will be controlled by the scripts
      - Attempting to use the PC might produce unexpected results like selecting or opening random apps and documents
- 5. Start Discord-Remote.exe like any other executable
- 6. Discord Remote is now running and can receive commands
+ 6. Start Discord-Remote.exe like any other executable
+ 7. Discord Remote is now running and can receive commands
      - You can send commands from any other device that can access Discord (browser or app)
      - Commands must be sent into the `discord-remote-in` channel
      - Command results will be sent in the `discord-remote-out` channel
- 7. To stop Discord Remote, send the Shutdown command
+ 8. To stop Discord Remote, send the Shutdown command
      - Alternatively, you can press `F4` on the PC being controlled
 
 ## Configuration
