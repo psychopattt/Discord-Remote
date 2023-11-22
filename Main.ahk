@@ -28,6 +28,7 @@ KillAllScripts(*)
     ProcessClose(sleepBlockerPid)
     ProcessClose(discordManagerPid)
     ProcessClose(discordFailsafePid)
+    WinSetTransparent("Off", "ahk_exe Discord.exe")
     OnExit(KillAllScripts, 0)
     ExitApp()
 }
