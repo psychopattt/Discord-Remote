@@ -280,5 +280,8 @@ WriteCommandHelp(command)
         "+{Enter}{BS}‎{Enter}"
     )
 
-    Sleep(processDelay * 10)
+    Sleep(Max(
+        processDelay,
+        Integer(processDelay * StrLen(helpMessage) / 34)
+    ))
 }
