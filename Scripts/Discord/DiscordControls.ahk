@@ -5,6 +5,7 @@ GetOrCreateDiscordHandle()
 {
     global processDelay
     global discordHandle
+    isNewProcess := !IsSet(discordHandle) || !WinExist("ahk_id " . discordHandle)
     discordHandle := WinExist("ahk_exe Discord.exe")
 
     if (!discordHandle)
@@ -20,7 +21,7 @@ GetOrCreateDiscordHandle()
         }
     }
 
-    if (autoHideDiscord)
+    if (isNewProcess && autoHideDiscord)
         WinSetTransparent(0, "ahk_id " . discordHandle)
 }
 
