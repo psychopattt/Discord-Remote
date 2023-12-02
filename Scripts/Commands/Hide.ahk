@@ -71,7 +71,7 @@ HideProcess(mode, app, desiredOpacity)
     if (desiredOpacity == -1)
     {
         currentOpacity := WinGetTransparent("ahk_id " . handle)
-        desiredOpacity := (!IsInteger(currentOpacity) || currentOpacity > 0) ? 0 : "Off"
+        desiredOpacity := (!IsInteger(currentOpacity) || currentOpacity > 10) ? 0 : "Off"
     }
     
     WinSetTransparent(desiredOpacity, "ahk_id " . handle)
