@@ -114,12 +114,13 @@ WriteCommandHelp(command)
             helpMessage := "
             (
                 Focus a specific window (bring it to the foreground)
+                Use the Process command to retrieve process identifiers
 
                 Options:
-                - Mode App: Specifies the detection mode and the app identifier
+                - Mode Id: Specifies the detection mode and the process identifier
                   - Mode: Handle (H), Name (N) or PID (P)
                     - The handle is always unique and can focus hidden windows
-                  - App: The identifier of the app in the current mode
+                  - Id: The identifier of the process in the current mode
 
                 Examples:
                 - Focus n paint ; Focuses a process named "paint.exe"
@@ -130,14 +131,15 @@ WriteCommandHelp(command)
             helpMessage := "
             (
                 Changes the opacity of a specific window
+                Use the Process command to retrieve process identifiers
 
                 Options:
-                - Mode App: Specifies the detection mode and the app identifier
+                - Mode Id: Specifies the detection mode and the process identifier
                   - Mode: Handle (H), Name (N) or PID (P)
                     - The handle is always unique and can focus hidden windows
-                  - App: The identifier of the app in the current mode
+                  - Id: The identifier of the process in the current mode
                 - Opacity: Specifies the desired opacity (between 0 and 255)
-                  - If present, the opacity must appear after Mode and App
+                  - If present, the opacity must appear after Mode and Id
                   - If omitted or equal to -1, toggles between fully transparent and fully opaque
 
                 Examples:
@@ -195,6 +197,22 @@ WriteCommandHelp(command)
 
                 Example:
                 - Ping ; Writes a message in the output channel
+            )"
+        case "process":
+            helpMessage := "
+            (
+                Outputs a list of running processes with their identifiers
+
+                Options:
+                - Hidden (H), All (A) or *: Outputs a list of all running processes, including hidden ones
+                - Default: Outputs a list of all visible running processes
+                  - There might be more processes when running as administrator
+
+                Examples:
+                - Process ; Outputs a list of all visible running processes
+                - Process h ; Outputs a list of all running processes, including hidden ones
+                - Process * ; Outputs a list of all running processes, including hidden ones
+                - Process All ; Outputs a list of all running processes, including hidden ones
             )"
         case "screenshot":
             helpMessage := "
