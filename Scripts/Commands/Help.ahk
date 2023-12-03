@@ -54,6 +54,7 @@ WriteCommandHelp(command)
                 - Input
                 - Mouse
                 - Ping
+                - Process
                 - Screenshot
                 - Search
                 - Shutdown
