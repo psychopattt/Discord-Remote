@@ -23,6 +23,8 @@ FileInstall(".\Scripts\Commands\Mouse.ahk", ".\Scripts\Commands\Mouse.ahk", 0)
 } try {
 FileInstall(".\Scripts\Commands\Ping.ahk", ".\Scripts\Commands\Ping.ahk", 0)
 } try {
+FileInstall(".\Scripts\Commands\Process.ahk", ".\Scripts\Commands\Process.ahk", 0)
+} try {
 FileInstall(".\Scripts\Commands\Screenshot.ahk", ".\Scripts\Commands\Screenshot.ahk", 0)
 } try {
 FileInstall(".\Scripts\Commands\Search.ahk", ".\Scripts\Commands\Search.ahk", 0)
