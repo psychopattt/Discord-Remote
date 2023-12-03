@@ -29,6 +29,7 @@ All the commands and their details can be seen remotely by using the Help comman
  - Input: Send inputs (Similar to AutoHotKey's [SendInput](https://www.autohotkey.com/docs/v2/lib/Send.htm#SendInputDetail) function)
  - Mouse: Move the mouse to the specified position on the screen
  - Ping: Send a simple ping to see if Discord Remote is running
+ - Process: Output a list of running processes with their identifiers
  - Screenshot: Take a screenshot and send it in the output channel
  - Search: Search text in the Windows search box and start the first result
  - Shutdown: Terminate Discord Remote and optionally lock the PC
